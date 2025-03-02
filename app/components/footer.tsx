@@ -1,8 +1,6 @@
 import {FaFacebook} from "react-icons/fa"
 import {FaWhatsapp} from "react-icons/fa"
-import {FaInstagram} from "react-icons/fa"
 import Image from "next/image"
-import Link from "next/link"
 
 
 
@@ -72,19 +70,9 @@ const Footer = () => {
             <a href="https://wa.me/2348078218187" className="w-12 h-12 border-1 border-[#2d2df1] rounded-full text-[#2d2df1] flex items-center justify-center">
               <FaWhatsapp size={24}/>
             </a>
-            {/* <button className="w-12 h-12 border-1 border-[#2d2df1] rounded-full text-[#2d2df1] flex items-center justify-center">
-              <FaInstagram size={24}/>
-            </button> */}
           </div>
-
-          {/* <div className="self-end">
-            <Link href="/" className="px-4 py-2 border-1 border-[#2d2df1] rounded-full text-[#2d2df1]">Back to Home</Link>
-          </div> */}
         </div>
       </footer>
-      {/* <aside className="text-center py-4">
-        &copy; 2025, Orion Farms
-      </aside> */}
     </div>
   )
 }
