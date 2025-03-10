@@ -1,19 +1,19 @@
 'use client'
 import React, { useState } from 'react'
 import Image from 'next/image'
-import { CartDocker } from '../components/cart'
-import { useSearchParams } from 'next/navigation'
+// import { CartDocker } from '../components/cart'
+// import { useSearchParams } from 'next/navigation'
 
 const Page = () => {
   // const router = useRouter()
 
-  const searchParams = useSearchParams()
+  // const searchParams = useSearchParams()
   // const qty = searchParams.get('qty')
   // const item = searchParams.get('item')
   // const price = searchParams.get('price')
 
   // const addToCart = router.push('/?')
-  const [isCart, setIsCart] = useState(true)
+  // const [isCart, setIsCart] = useState(true)
 
   return (
     <div className="w-full min-h-screen px-4 gap-16 sm:px-20 font-[family-name:var(--lexend)]">
@@ -131,10 +131,6 @@ const Page = () => {
             </li>
           </ul>
         </section>
-        {
-          isCart &&
-          <CartDocker/>
-        }
       </main>
     </div>
   )
