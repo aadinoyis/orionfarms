@@ -403,10 +403,12 @@ export default function Home() {
 
               Due to the high unemployment rate and minimal to zero opportunities for employment in our local communities, the Co-founders of Orion 4s Farms believe that a sustained commercial agricultural investment in these communities will gradually accelerate the improvement of their respective local economies; reduce unemployment rate and elevate the standard of living. That is the future we aspire.
             </p>
+            <br /><br />
+            <Link href="/about"  className="max-w-[500px] px-4 py-2 border-1 border-[#f0f0ff] rounded-full text-[#f0f0ff] text-center">Learn More</Link>
           </div>
         </section>
 
-        <section className="flex flex-col gap-8 bg-[#2d2df1] text-[#f0f0ff] p-8 rounded-sm" id="about">
+        {/* <section className="flex flex-col gap-8 bg-[#2d2df1] text-[#f0f0ff] p-8 rounded-sm" id="about">
           <div className="w-[100%]">  
             <h1 className="sm:text-6xl text-4xl">
               <strong>Initiatives and Support</strong>
@@ -416,11 +418,11 @@ export default function Home() {
 
           <div className="pl-8">
             <p>
-              The idea for Orion 4s Farms was born in 2020 at the early stages of the COVID 19 pandemic. Our Co-founder Olusoga Orion & Olusoga Aina, who after graduation from the university was unable to secure appropriate employment, became inspired  after visiting his friend who was working at an egg depot. That simple interaction at an egg depot with deep introspection that followed thereafter became the genesis of Orion 4s Farms.
+              At Orion Farms, we believe that every child deserves access to quality education and resources that foster their growth and development. As a responsible and caring member of our community, we are committed to supporting the educational journey of our children in need.
 
-              The current focus on commercial table egg layer operations is due to the unmet demand in Nigeria. The vision is to systematically establish major poultry production facilities in different local communities, such that these networks of communities will become meaningful stakeholders and contributors to the Nigerian global food system.
+              Our mission is to provide essential educational materials and resources to children, empowering them to reach their full potential. We believe that education is the key to unlocking a brighter future, and we are dedicted to making a positive impact in the lives of young people.
 
-              Due to the high unemployment rate and minimal to zero opportunities for employment in our local communities, the Co-founders of Orion 4s Farms believe that a sustained commercial agricultural investment in these communities will gradually accelerate the improvement of their respective local economies; reduce unemployment rate and elevate the standard of living. That is the future we aspire.
+              Our farm suppot and initiative for children focuses on providing essential educational materials, such as Books, Writing materials and other Education resources.
             </p>
           </div>
 
@@ -440,7 +442,7 @@ export default function Home() {
               className="grow w-full sm:w-[50%] h-[500px] object-cover shrink-0 rounded-sm"
             />
           </div>
-        </section>
+        </section> */}
 
         <section className="w-full flex flex-col gap-8">
           <div className="w-full">  
