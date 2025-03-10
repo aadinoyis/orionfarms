@@ -1,17 +1,16 @@
 'use client'
 import React, { useState } from 'react'
 import Image from 'next/image'
-import Popup from '../components/popup'
 import { CartDocker } from '../components/cart'
-import { useSearchParams, useRouter } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
 
 const Page = () => {
-  const router = useRouter()
+  // const router = useRouter()
 
   const searchParams = useSearchParams()
-  const qty = searchParams.get('qty')
-  const item = searchParams.get('item')
-  const price = searchParams.get('price')
+  // const qty = searchParams.get('qty')
+  // const item = searchParams.get('item')
+  // const price = searchParams.get('price')
 
   // const addToCart = router.push('/?')
   const [isCart, setIsCart] = useState(true)
