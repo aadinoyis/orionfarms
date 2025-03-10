@@ -22,11 +22,12 @@ const Header = () => {
       <nav>
         <ul className="sm:flex gap-4 hidden">
           <li><Link href="/">Home</Link></li>
-          <li><Link href="/#services">Services</Link></li>
-          <li><Link href="/#about">About</Link></li>
-          <li><Link href="/#contact">Contact</Link></li>
-          <li><Link href="/#blog">Blog</Link></li>
-          <li><Link href="/#faq">Faq</Link></li>
+          {/* <li><Link href="/#services">Services</Link></li> */}
+          <li><Link href="/shop">Shop</Link></li>
+          <li><Link href="/about">About</Link></li>
+          <li><Link href="/contact">Contact</Link></li>
+          <li><Link href="/blog">Blog</Link></li>
+          <li><Link href="/faq">Faq</Link></li>
         </ul>
       </nav>
 
@@ -47,11 +48,12 @@ const Header = () => {
               />
             </li>
             <li><Link href="/" onClick={()=>setIsMenu(false)}>Home</Link></li>
-            <li><Link href="/#services" onClick={()=>setIsMenu(false)}>Services</Link></li>
-            <li><Link href="/#about" onClick={()=>setIsMenu(false)}>About</Link></li>
-            <li><Link href="/#contact" onClick={()=>setIsMenu(false)}>Contact</Link></li>
-            <li><Link href="/#blog" onClick={()=>setIsMenu(false)}>Blog</Link></li>
-            <li><Link href="/#faq" onClick={()=>setIsMenu(false)}>Faq</Link></li>
+            {/* <li><Link href="/#services" onClick={()=>setIsMenu(false)}>Services</Link></li> */}
+            <li><Link href="/shop" onClick={()=>setIsMenu(false)}>Shop</Link></li>
+            <li><Link href="/about" onClick={()=>setIsMenu(false)}>About</Link></li>
+            <li><Link href="/contact" onClick={()=>setIsMenu(false)}>Contact</Link></li>
+            <li><Link href="/blog" onClick={()=>setIsMenu(false)}>Blog</Link></li>
+            <li><Link href="/faq" onClick={()=>setIsMenu(false)}>Faq</Link></li>
             <li>
               <button 
                 onClick={()=>setIsMenu(false)}

@@ -34,12 +34,7 @@ export default function Home() {
 
             <p>Orion farms is your strategic partner when it comes to starting your farm business!</p>
             
-            {/* <div className="flex gap-4 py-8 overflow-x-scroll">
-              <button className="ml-auto px-4 py-2 border-1 border-[#2d2df1] rounded-full text-[#2d2df1] whitespace-nowrap">Explore all</button>
-              <button className="px-4 py-2 border-1 border-[#2d2df1] rounded-full text-[#2d2df1] whitespace-nowrap">Egg shop</button>
-              <button className="px-4 py-2 border-1 border-[#2d2df1] rounded-full text-[#2d2df1] whitespace-nowrap">Leather shop</button>
-              <button className="mr-auto px-4 py-2 border-1 border-[#2d2df1] rounded-full text-[#2d2df1] whitespace-nowrap">Restaurant</button>
-            </div> */}
+            
             
           </div>
           <div className="relative w-full h-[500px] rounded-sm bg-[#2d2df1]">
@@ -51,7 +46,7 @@ export default function Home() {
               className="w-[150px] h-auto shrink-0 absolute top-0 left-0"
             />
             <Image
-              src={"/images/medium-shot-smiley-farmer-cornfield.jpg"} 
+              src={"/images/hero-image.jpg"} 
               alt={"Orion Farms"}
               width={2750}
               height={1536}
@@ -411,28 +406,39 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="flex flex-col gap-8 bg-[#2d2df1] text-[#f0f0ff] p-8 rounded-sm">
+        <section className="flex flex-col gap-8 bg-[#2d2df1] text-[#f0f0ff] p-8 rounded-sm" id="about">
           <div className="w-[100%]">  
             <h1 className="sm:text-6xl text-4xl">
-              <strong>Our </strong>
-              <em>Vision</em>
+              <strong>Initiatives and Support</strong>
+              <em>For Children</em>
             </h1>
           </div>
 
           <div className="pl-8">
             <p>
-              Our vision is to stand as the foremost provider of strategic solutions, consistently delivering exceptional and personalized services. We believe that success lies not only in providing top-notch services, but also in building long-lasting relationships with our clients. With a solid track record of helping businesses achieve their goals, we are confident in our ability to support you in every step of your journey.
+              The idea for Orion 4s Farms was born in 2020 at the early stages of the COVID 19 pandemic. Our Co-founder Olusoga Orion & Olusoga Aina, who after graduation from the university was unable to secure appropriate employment, became inspired  after visiting his friend who was working at an egg depot. That simple interaction at an egg depot with deep introspection that followed thereafter became the genesis of Orion 4s Farms.
 
-              Whether you&apos;re starting a new venture or poised for expansion, our commitment is to collaborate and propel you towards your goals. We understand that every business is unique, with its own set of challenges and aspirations. That&apos;s why we take the time to truly understand your needs and tailor our solutions to meet them effectively.
+              The current focus on commercial table egg layer operations is due to the unmet demand in Nigeria. The vision is to systematically establish major poultry production facilities in different local communities, such that these networks of communities will become meaningful stakeholders and contributors to the Nigerian global food system.
 
-              Our team of experts is dedicated to staying ahead of the curve and constantly exploring innovative strategies to keep your business ahead of the competition. By leveraging our industry knowledge and expertise, we are able to offer insights and guidance that will help you make informed decisions and maximize your growth potential.
-
-              At Orion 4s Farms, we believe in going the extra mile for our clients. We strive to exceed your expectations by not only providing exceptional services but by also building strong partnerships based on trust and mutual success. Our client-focused approach ensures that your unique goals and objectives are at the forefront of everything we do.
-
-              No matter the size or complexity of your project, we have the resources and expertise to deliver results. From comprehensive market research to strategic planning and implementation, our team is equipped with the skills necessary to take your business to the next level.
-
-              Choose Orion 4s Farms as your strategic solutions provider and experience the difference of working with a dedicated and passionate team who genuinely cares about your success. With us by your side, you can rest assured that your vision will be turned into reality, driving your business towards unprecedented growth and achievements.
+              Due to the high unemployment rate and minimal to zero opportunities for employment in our local communities, the Co-founders of Orion 4s Farms believe that a sustained commercial agricultural investment in these communities will gradually accelerate the improvement of their respective local economies; reduce unemployment rate and elevate the standard of living. That is the future we aspire.
             </p>
+          </div>
+
+          <div className="w-full flex flex-col sm:flex-row h-[auto] rounded-sm bg-[#2d2df1] gap-2 overflow-hidden">
+            <Image
+              src={"/images/student-service-1.png"} 
+              alt={"Orion Farms"}
+              width={2750}
+              height={1536}
+              className="grow w-full sm:w-[50%] h-[500px] object-cover shrink-0 rounded-sm"
+            />
+            <Image
+              src={"/images/student-service-2.png"} 
+              alt={"Orion Farms"}
+              width={2750}
+              height={1536}
+              className="grow w-full sm:w-[50%] h-[500px] object-cover shrink-0 rounded-sm"
+            />
           </div>
         </section>
 
@@ -474,90 +480,90 @@ export default function Home() {
         </aside>
 
         <section className="flex flex-col gap-8" id="faq">
-        <div className="w-full">  
-          <h1 className="sm:text-6xl text-4xl">
-            <strong>Frequently Asked </strong><br />
-            <em>Questions </em>
-          </h1>
-        </div>
+          <div className="w-full">  
+            <h1 className="sm:text-6xl text-4xl">
+              <strong>Frequently Asked </strong><br />
+              <em>Questions </em>
+            </h1>
+          </div>
 
-        <div>
-          <ul>
-            {
-              faq.map(single  => (
-                <li key={single.question}>
-                  <div className="text-2xl p-4 border-b border-[#2d2df1]">{single.question}</div>
-                  <div className="p-4">{single.answer}</div>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-      </section>
+          <div>
+            <ul>
+              {
+                faq.map(single  => (
+                  <li key={single.question}>
+                    <div className="text-2xl p-4 border-b border-[#2d2df1]">{single.question}</div>
+                    <div className="p-4">{single.answer}</div>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        </section>
 
-      <section className="flex flex-col gap-8" id="blog">
-        <div className="w-full">  
-          <h1 className="sm:text-6xl text-4xl">
-            <strong>News & </strong>
-            <em>Blog </em>
-          </h1>
-        </div>
+        <section className="flex flex-col gap-8" id="blog">
+          <div className="w-full">  
+            <h1 className="sm:text-6xl text-4xl">
+              <strong>News & </strong>
+              <em>Blog </em>
+            </h1>
+          </div>
 
-        <div className="flex flex-col gap-8">
-          <ul className="flex flex-col sm:flex-row gap-8">
-            <li className="flex gap-2">
-              <div>
-                <h2 className="text-xl">Sustainable Farming Excellence Award</h2>
-                <span className="text-sm">Posted: <strong>Thursday, 24 Jan, 2025</strong></span>
-              </div>
+          <div className="flex flex-col gap-8">
+            <ul className="flex flex-col sm:flex-row gap-8">
+              <li className="flex gap-2">
+                <div>
+                  <h2 className="text-xl">Sustainable Farming Excellence Award</h2>
+                  <span className="text-sm">Posted: <strong>Thursday, 24 Jan, 2025</strong></span>
+                </div>
 
-              <div className="w-[100px] h-[100px] shrink-0 bg-[#2d2df1] rounded-sm p-2">
-                <Image
-                  src={"/images/hens-1528984922.jpg"} 
-                  alt={"Orion Farms"}
-                  width={2750}
-                  height={1536}
-                  className="w-[100%] h-[100%] object-cover object-top rounded-sm shrink-0"
-                />
-              </div>
-            </li>
-            <li className="flex gap-2">
-              <div>
-                <h2 className="text-xl">Sustainable Farming Excellence Award</h2>
-                <span className="text-sm">Posted: <strong>Thursday, 24 Jan, 2025</strong></span>
-              </div>
+                <div className="w-[100px] h-[100px] shrink-0 bg-[#2d2df1] rounded-sm p-2">
+                  <Image
+                    src={"/images/hens-1528984922.jpg"} 
+                    alt={"Orion Farms"}
+                    width={2750}
+                    height={1536}
+                    className="w-[100%] h-[100%] object-cover object-top rounded-sm shrink-0"
+                  />
+                </div>
+              </li>
+              <li className="flex gap-2">
+                <div>
+                  <h2 className="text-xl">Sustainable Farming Excellence Award</h2>
+                  <span className="text-sm">Posted: <strong>Thursday, 24 Jan, 2025</strong></span>
+                </div>
 
-              <div className="w-[100px] h-[100px] shrink-0 bg-[#2d2df1] rounded-sm p-2">
-                <Image
-                  src={"/images/hens-1528984922.jpg"} 
-                  alt={"Orion Farms"}
-                  width={2750}
-                  height={1536}
-                  className="w-[100%] h-[100%] object-cover object-top rounded-sm shrink-0"
-                />
-              </div>
-            </li>
-            <li className="flex gap-2">
-              <div>
-                <h2 className="text-xl">Sustainable Farming Excellence Award</h2>
-                <span className="text-sm">Posted: <strong>Thursday, 24 Jan, 2025</strong></span>
-              </div>
+                <div className="w-[100px] h-[100px] shrink-0 bg-[#2d2df1] rounded-sm p-2">
+                  <Image
+                    src={"/images/hens-1528984922.jpg"} 
+                    alt={"Orion Farms"}
+                    width={2750}
+                    height={1536}
+                    className="w-[100%] h-[100%] object-cover object-top rounded-sm shrink-0"
+                  />
+                </div>
+              </li>
+              <li className="flex gap-2">
+                <div>
+                  <h2 className="text-xl">Sustainable Farming Excellence Award</h2>
+                  <span className="text-sm">Posted: <strong>Thursday, 24 Jan, 2025</strong></span>
+                </div>
 
-              <div className="w-[100px] h-[100px] shrink-0 bg-[#2d2df1] rounded-sm p-2">
-                <Image
-                  src={"/images/hens-1528984922.jpg"} 
-                  alt={"Orion Farms"}
-                  width={2750}
-                  height={1536}
-                  className="w-[100%] h-[100%] object-cover object-top rounded-sm shrink-0"
-                />
-              </div>
-            </li>
-          </ul>
-          
-          <Link href="/blog"  className="max-w-[500px] px-4 py-2 border-1 border-[#2d2df1] rounded-full text-[#2d2df1] text-center">Read More</Link>
-        </div>
-      </section>
+                <div className="w-[100px] h-[100px] shrink-0 bg-[#2d2df1] rounded-sm p-2">
+                  <Image
+                    src={"/images/hens-1528984922.jpg"} 
+                    alt={"Orion Farms"}
+                    width={2750}
+                    height={1536}
+                    className="w-[100%] h-[100%] object-cover object-top rounded-sm shrink-0"
+                  />
+                </div>
+              </li>
+            </ul>
+            
+            <Link href="/blog"  className="max-w-[500px] px-4 py-2 border-1 border-[#2d2df1] rounded-full text-[#2d2df1] text-center">Read More</Link>
+          </div>
+        </section>
       </main>
     </div>
   );
