@@ -90,7 +90,7 @@ export default function Home() {
                     </p>
 
                     <div>
-                      <a target="_blank" href="https://wa.me/2348078218187?I%20want%20to%20book%20a%20restaurant" className="px-4 py-2 border-1 border-[#2d2df1] rounded-full text-[#2d2df1]">Book Now</a>
+                      <Link href="/shop" className="px-4 py-2 border-1 border-[#2d2df1] rounded-full text-[#2d2df1]">Book Now</Link>
                     </div>
                   </div>
                 </div>
@@ -120,7 +120,7 @@ export default function Home() {
                     </p>
 
                     <div>
-                      <a target="_blank" href="https://wa.me/2348078218187?text=I%20want%20to%20request%20for%20eggs" className="px-4 py-2 border-1 border-[#2d2df1] rounded-full text-[#2d2df1]">Book Now</a>
+                      <Link href="/shop" className="px-4 py-2 border-1 border-[#2d2df1] rounded-full text-[#2d2df1]">Book Now</Link>
                     </div>
                   </div>
                 </div>
@@ -152,7 +152,7 @@ export default function Home() {
 
                     
                     <div>
-                      <a target="_blank" href="https://wa.me/2348078218187?text=I%20want%20to%20request%20for%20some%20leather" className="px-4 py-2 border-1 border-[#2d2df1] rounded-full text-[#2d2df1]">Book Now</a>
+                      <Link href="/shop" className="px-4 py-2 border-1 border-[#2d2df1] rounded-full text-[#2d2df1]">Book Now</Link>
                     </div>
                   </div>
                 </div>

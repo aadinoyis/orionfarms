@@ -113,11 +113,11 @@ const Page = () => {
             <div className="flex flex-col gap-2">
               <h3 className="text-3xl text-bold">Olusoga Orion</h3>
               <div className="text-sm">Founder &amp; CEO</div>
-              <p className='text-2xl text-[#2d2df1]'>
+              {/* <p className='text-2xl text-[#2d2df1]'>
                 Our collected eggs from our healthy birds are always within your reach.
                 We make sure to give our birds the best treatment so that they can produce
                 a good, healthy and big eggs for consumption.
-              </p>
+              </p> */}
             </div>
           </div>
         </section>

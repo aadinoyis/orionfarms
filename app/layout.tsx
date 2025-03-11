@@ -4,6 +4,8 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Header from "./components/header";
 import Footer from "./components/footer";
+import { BlogsProvider } from "@/context/blogsContext";
+import { ItemsProvider } from "@/context/itemsContext";
 
 const myFont = localFont({
   src: './fonts/Lexend.ttf',
@@ -25,9 +27,13 @@ export default function RootLayout({
       <body
         className={`${myFont.variable} antialiased`}
       >
-        <Header/>
-        {children}
-        <Footer/>
+        <BlogsProvider>
+          <ItemsProvider>
+            <Header/>
+            {children}
+            <Footer/>
+          </ItemsProvider>
+        </BlogsProvider>
       </body>
     </html>
   );

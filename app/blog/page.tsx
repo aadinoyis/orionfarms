@@ -1,57 +1,55 @@
+'use client'
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useBlogsContext } from '@/context/blogsContext'
+import { useSearchParams } from 'next/navigation'
 
 const Page = () => {
+  const searchParams = useSearchParams()
+  const {blogs} = useBlogsContext()
+  const current = searchParams.get('current')
+
   return (
     <div className="w-full min-h-screen px-4 gap-16 sm:px-20 font-[family-name:var(--lexend)]">
       <main className="py-8 w-full flex flex-col gap-24">
-        <section className="flex flex-col gap-8" id="blog">
-          <div className="w-full">  
-            <h1 className="sm:text-6xl text-4xl">
-              <strong>Sustainable Farming Excellence Award</strong>
-            </h1>
-          </div>
+        {
+          blogs.map(blog => (
+            blog.id == current ?
+            <section key={blog.id} className="flex flex-col gap-8" id="blog">
+              <div className="w-full">  
+                <h1 className="sm:text-6xl text-4xl">
+                  <strong>{blog.title}</strong>
+                </h1>
+              </div>
 
-          <div>
-            <h2 className="text-xl">Sustainable Farming Excellence Award</h2>
-            <span className="text-sm">Posted: <strong>Thursday, 24 Jan, 2025</strong></span>
-          </div>
+              <div>
+                <h2 className="text-xl">{blog.category}</h2>
+                <span className="text-sm">Posted: <strong>{blog.date}</strong></span>
+              </div>
 
-          <div className="flex flex-col gap-8 w-full max-w-[800px]">
-            <div className="w-full h-[400px] shrink-0 bg-[#2d2df1] rounded-sm">
-              <Image
-                src={"/images/hens-1528984922.jpg"} 
-                alt={"Orion Farms"}
-                width={2750}
-                height={1536}
-                className="w-[100%] h-[100%] object-cover object-top rounded-sm shrink-0"
-              />
-            </div>
+              <div className="flex flex-col gap-8 w-full max-w-[800px]">
+                <div className="w-full h-[400px] shrink-0 bg-[#2d2df1] rounded-sm">
+                  <Image
+                    src={blog.images[0]} 
+                    alt={"Orion Farms"}
+                    width={2750}
+                    height={1536}
+                    className="w-[100%] h-[100%] object-cover object-top rounded-sm shrink-0"
+                  />
+                </div>
 
-            <div className='text-xl'>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Est at maxime soluta nulla molestias quisquam, 
-              nobis deserunt molestiae ab! Ducimus fugiat exercitationem ex illum labore quasi officia voluptate culpa 
-              nobis cum, velit, perspiciatis eum id neque, porro non deserunt molestias odit. Tempore, expedita ratione corporis recusandae eius aut. 
-              Doloremque magni quae, expedita praesentium suscipit voluptatem veniam modi excepturi 
-              nemo pariatur odit, nam consequatur optio repudiandae omnis repellat. Possimus rem qui facilis, fugit alias iusto adipisci voluptatem 
-              repudiandae tenetur natus optio dolor soluta labore ab obcaecati nesciunt quibusdam minus ipsa ipsum cupiditate blanditiis consequuntur 
-              facere, minima magni! Minima sapiente accusamus nulla.
-
-              <br /><br />
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Est at maxime soluta nulla molestias quisquam, 
-              nobis deserunt molestiae ab! Ducimus fugiat exercitationem ex illum labore quasi officia voluptate culpa 
-              nobis cum, velit, perspiciatis eum id neque, porro non deserunt molestias odit. Tempore, expedita ratione corporis recusandae eius aut. 
-              Doloremque magni quae, expedita praesentium suscipit voluptatem veniam modi excepturi 
-              nemo pariatur odit, nam consequatur optio repudiandae omnis repellat. Possimus rem qui facilis, fugit alias iusto adipisci voluptatem 
-              repudiandae tenetur natus optio dolor soluta labore ab obcaecati nesciunt quibusdam minus ipsa ipsum cupiditate blanditiis consequuntur 
-              facere, minima magni! Minima sapiente accusamus nulla.
-
-              <br />
-            </div>
-            
-          </div>
-        </section>
+                <div>
+                  {
+                    blog.description
+                  }
+                </div>
+                
+              </div>
+            </section>
+          : ""
+          ))
+        }
 
         <section className="flex flex-col gap-8" id="blog">
           <div className="w-full">  
@@ -62,55 +60,28 @@ const Page = () => {
           </div>
           
           <div className="flex flex-col gap-8">
-            <ul className="flex flex-col sm:flex-row gap-8">
-              <li className="flex gap-2">
-                <div>
-                  <h2 className="text-xl">Sustainable Farming Excellence Award</h2>
-                  <span className="text-sm">Posted: <strong>Thursday, 24 Jan, 2025</strong></span>
-                </div>
+            <ul className="flex flex-wrap flex-col sm:flex-row gap-8">
+              {
+                blogs.map(blog => (
+                <li key={blog.id} className="shrink-0 flex gap-2 max-w-[400px]">
+                  <div>
+                    <h2 className="text-xl">{blog.title}</h2>
+                    <span className="text-sm">Posted: <strong>{blog.date}</strong></span>
+                  </div>
 
-                <div className="w-[100px] h-[100px] shrink-0 bg-[#2d2df1] rounded-sm p-2">
-                  <Image
-                    src={"/images/hens-1528984922.jpg"} 
-                    alt={"Orion Farms"}
-                    width={2750}
-                    height={1536}
-                    className="w-[100%] h-[100%] object-cover object-top rounded-sm shrink-0"
-                  />
-                </div>
-              </li>
-              <li className="flex gap-2">
-                <div>
-                  <h2 className="text-xl">Sustainable Farming Excellence Award</h2>
-                  <span className="text-sm">Posted: <strong>Thursday, 24 Jan, 2025</strong></span>
-                </div>
-
-                <div className="w-[100px] h-[100px] shrink-0 bg-[#2d2df1] rounded-sm p-2">
-                  <Image
-                    src={"/images/hens-1528984922.jpg"} 
-                    alt={"Orion Farms"}
-                    width={2750}
-                    height={1536}
-                    className="w-[100%] h-[100%] object-cover object-top rounded-sm shrink-0"
-                  />
-                </div>
-              </li>
-              <li className="flex gap-2">
-                <div>
-                  <h2 className="text-xl">Sustainable Farming Excellence Award</h2>
-                  <span className="text-sm">Posted: <strong>Thursday, 24 Jan, 2025</strong></span>
-                </div>
-
-                <div className="w-[100px] h-[100px] shrink-0 bg-[#2d2df1] rounded-sm p-2">
-                  <Image
-                    src={"/images/hens-1528984922.jpg"} 
-                    alt={"Orion Farms"}
-                    width={2750}
-                    height={1536}
-                    className="w-[100%] h-[100%] object-cover object-top rounded-sm shrink-0"
-                  />
-                </div>
-              </li>
+                  <Link href={`/blog?current=${blog.id}`} className="w-[100px] h-[100px] shrink-0 bg-[#2d2df1] rounded-sm p-2">
+                    <Image
+                      src={blog.images[0]} 
+                      alt={"Orion Farms"}
+                      width={2750}
+                      height={1536}
+                      className="w-[100%] h-[100%] object-cover object-top rounded-sm shrink-0"
+                    />
+                  </Link>
+                </li>
+                ))
+              }
+              
             </ul>
             
             <Link href="/blog"  className="max-w-[500px] px-4 py-2 border-1 border-[#2d2df1] rounded-full text-[#2d2df1] text-center">Load More</Link>
