@@ -31,7 +31,7 @@ const Header = () => {
         </ul>
       </nav>
 
-      <Link href="/shop" className="shrink-0 px-4 py-2 border-1 border-[#2d2df1] rounded-full text-[#2d2df1]">Shop here</Link>
+      <Link href="/checkout" className="shrink-0 px-4 py-2 border-1 border-[#2d2df1] rounded-full text-[#2d2df1]">View Cart</Link>
       <button onClick={()=>setIsMenu(true)} className="shrink-0 sm:hidden block px-4 py-2 border-1 border-[#2d2df1] rounded-full text-[#2d2df1]"><FaBars size={24}/></button>
 
       {

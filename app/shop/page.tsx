@@ -5,6 +5,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { useItemsContext } from '@/context/itemsContext'
 
+
 const Page = () => {
   const {items, addItem} = useItemsContext()
 
@@ -42,7 +43,7 @@ const Page = () => {
                   <Link href={`/shop/${item.id}`}  className="w-full flex gap-8">
                     <div className="w-full flex items-end justify-end h-[200px] overflow-hidden rounded-sm bg-[#2d2df1]">
                       <Image
-                        src={item.images[0]} 
+                        src={item.imageUrl[0]} 
                         alt={"Orion Farms"}
                         width={2750}
                         height={1536}
@@ -53,14 +54,14 @@ const Page = () => {
                   <div className="flex flex-col gap-4">
                     <div className="text-sm text-bold text-[#2d2df1]">
                       {
-                        item.category.map((category, index) => (<span key={index}>{category}, </span>))
+                        item.category.join(', ')
                       }
                     </div>
                     <p className="max-h-[40px] text-sm overflow-hidden">
                       {item.description}
                     </p>
                     {/* <h3 className="text-3xl text-bolder">NGN 24,000</h3> */}
-                    <div className="text-bold text-[#2d2df1]">{item.currency} {item.price}</div>
+                    <div className="text-bold text-[#2d2df1]">NGN {item.price}</div>
                     <div>
                       <button className="px-4 py-2 border-1 border-[#2d2df1] rounded-full text-[#2d2df1]" onClick={() => updateItem(item.id)}>Add to cart</button>
                     </div>

@@ -2,16 +2,18 @@
 
 import React, { createContext, useContext, useState, ReactNode } from "react";
 import { items } from "@/data/items";
+import { getInventoryItems, deleteInventoryItem } from "@/utils/inventory";
+
 
 // Define the shape of a product
-export interface Item {
+interface Item {
   id: string;
-  title: string;
-  category: string[];
-  images: string[];
+  name: string;
   description: string;
-  price: string;
-  currency: string;
+  price: number;
+  quantity: number;
+  imageUrl: string[];
+  category: string[];
   unit: string;
 }
 
@@ -35,7 +37,7 @@ interface ProductContextType {
 const ItemsContext = createContext<ProductContextType | undefined>(undefined);
 
 // Sample initial data
-const initialProducts: Item[] = items
+const initialProducts = await getInventoryItems()
 
 // Context provider
 export const ItemsProvider = ({ children }: { children: ReactNode }) => {

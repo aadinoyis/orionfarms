@@ -6,6 +6,7 @@ import Header from "./components/header";
 import Footer from "./components/footer";
 import { BlogsProvider } from "@/context/blogsContext";
 import { ItemsProvider } from "@/context/itemsContext";
+import { AuthProvider } from "@/context/authContext";
 
 const myFont = localFont({
   src: './fonts/Lexend.ttf',
@@ -27,13 +28,15 @@ export default function RootLayout({
       <body
         className={`${myFont.variable} antialiased`}
       >
-        <BlogsProvider>
-          <ItemsProvider>
-            <Header/>
-            {children}
-            <Footer/>
-          </ItemsProvider>
-        </BlogsProvider>
+        <AuthProvider>  
+          <BlogsProvider>
+            <ItemsProvider>
+              <Header/>
+              {children}
+              <Footer/>
+            </ItemsProvider>
+          </BlogsProvider>
+        </AuthProvider>
       </body>
     </html>
   );

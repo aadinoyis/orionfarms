@@ -34,3 +34,7 @@ button:hover, a:hover {
   background: var(--brand-color);
   color: var(--background);
 }
+
+.toast {
+  transition: all .2s;
+}

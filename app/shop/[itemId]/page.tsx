@@ -31,7 +31,7 @@ const Page = ({ params }: { params: Params }) => {
                 <div key={item.id} className="flex flex-col gap-8 w-full max-w-[800px]">
                   <div className="w-full h-[400px] shrink-0 bg-[#2d2df1] rounded-sm">
                     <Image
-                      src={item.images[0]} 
+                      src={item.imageUrl[0]} 
                       alt={"Orion Farms"}
                       width={2750}
                       height={1536}
@@ -41,17 +41,17 @@ const Page = ({ params }: { params: Params }) => {
       
                   <div className="w-full">  
                     <h1 className="sm:text-6xl text-4xl">
-                      <strong>{item.title}</strong>
+                      <strong>{item.name}</strong>
                     </h1>
                   </div>
       
                   <div>
                     <h2 className="text-xl">
                       {
-                        item.category.map((category, index) => (<span key={index}>{category}, </span>))
+                        item.category.join(', ')
                       }
                     </h2>
-                    <span className="text-sm">{item.currency} {item.price}<strong>/{item.unit}</strong></span>
+                    <span className="text-sm">NGN {item.price}<strong>/{item.unit}</strong></span>
                   </div>
       
                   <div>
@@ -65,7 +65,7 @@ const Page = ({ params }: { params: Params }) => {
                       
                       <h4 className="text-sm">Quantity:</h4>
                       <div className='flex items-center gap-2'>
-                        <input type='number' placeholder='1' value={qty} onChange={(e)=>setQty(parseInt(e.target.value))}
+                        <input type='number' placeholder='1' min={1} value={qty} onChange={(e)=>setQty(parseInt(e.target.value))}
                         className="shrink-0 px-4 py-2 border-1 border-[#2d2df1] rounded-full text-[#2d2df1] max-w-[100px]"/>
                         <button className="shrink-0 px-4 py-2 border-1 border-[#2d2df1] rounded-full text-[#2d2df1]" onClick={() => updateItem(item.id, qty)}>Add to cart</button>
                       </div>

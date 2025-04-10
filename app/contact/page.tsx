@@ -3,8 +3,8 @@ import React from 'react'
 const page = () => {
   return (
     <div className="w-full min-h-screen px-4 gap-16 sm:px-20 font-[family-name:var(--lexend)]">
-      <main className="py-8 w-full flex flex-col gap-24">
-      <section className="w-full flex flex-col gap-8">
+      <main className="py-8 w-full flex flex-col sm:flex-row gap-24">
+        <section className="w-full flex flex-col gap-8">
           <div className="w-full">  
               <h1 className="sm:text-6xl text-4xl">
               <strong>Want to </strong><br />
@@ -40,9 +40,18 @@ const page = () => {
             <p>You can send us a message by completing this contact form</p>
 
             <div className="flex flex-col gap-4">
-              <input type="text" name="name" id="name" className="border-b-1 border-[#2d2df1] p-2" placeholder="Enter Your Name" />
-              <input type="text" name="email" id="email" className="border-b-1 border-[#2d2df1] p-2" placeholder="Enter Your Email Address" />
-              <textarea name="message" id="message" className="border-b-1 border-[#2d2df1] p-2" placeholder="Enter Your Message"></textarea>
+              <div className='flex flex-col'>
+                <label htmlFor="name" className='text-[#2d2df1] text-sm'>Full Name</label>
+                <input type="text" name="name" id="name" className="border-b-1 border-[#2d2df1] p-2" placeholder="Firstname Lastname" />
+              </div>
+              <div className='flex flex-col'>
+                <label htmlFor="name" className='text-[#2d2df1] text-sm'>Email Address</label>
+                <input type="text" name="email" id="email" className="border-b-1 border-[#2d2df1] p-2" placeholder="User@mail.com" />
+              </div>
+              <div className='flex flex-col'>
+                <label htmlFor="name" className='text-[#2d2df1] text-sm'>Message</label>
+                <textarea name="message" id="message" className="border-b-1 border-[#2d2df1] p-2" placeholder="Message"></textarea>
+              </div>
               <button className="px-4 py-2 border-1 border-[#2d2df1] rounded-full text-[#2d2df1]">Message us</button>
             </div>
           </div>
