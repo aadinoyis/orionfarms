@@ -35,8 +35,8 @@ const Page = () => {
     console.log(customerDetails.email, total)
 
     try {
-      // const response = await fetch("/api/initiate-transaction", {
-      const response = await fetch("/api/complete-checkout", {
+      // const response = await fetch("/api/complete-checkout", {
+        const response = await fetch("/api/initiate-transaction", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ 

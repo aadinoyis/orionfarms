@@ -1,5 +1,3 @@
-import https from 'https';
-
 export async function POST(req: Request) {
   try {
     const { phone, email, amount, customer, address, items, deliveryFee } = await req.json();
@@ -8,7 +6,7 @@ export async function POST(req: Request) {
       return new Response(JSON.stringify({ error: 'Email and amount are required' }), { status: 400 });
     }
 
-    const params = JSON.stringify({
+    const body = {
       email,
       amount,
       metadata: {
@@ -40,44 +38,25 @@ export async function POST(req: Request) {
           },
         ],
       },
-    });
+    };
 
-    const options = {
-      hostname: 'api.paystack.co',
-      port: 443,
-      path: '/transaction/initialize',
+    const res = await fetch('https://api.paystack.co/transaction/initialize', {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`,
         'Content-Type': 'application/json',
       },
-    };
-
-    return new Promise((resolve, reject) => {
-      const paystackReq = https.request(options, (paystackRes) => {
-        let data = '';
-
-        paystackRes.on('data', (chunk) => {
-          data += chunk;
-        });
-
-        paystackRes.on('end', () => {
-          try {
-            const response = JSON.parse(data);
-            resolve(new Response(JSON.stringify(response), { status: 200 }));
-          } catch (error) {
-            resolve(new Response(JSON.stringify({ error: 'Invalid response from Paystack' }), { status: 500 }));
-          }
-        });
-      });
-
-      paystackReq.on('error', (error) => {
-        reject(new Response(JSON.stringify({ error: error.message }), { status: 500 }));
-      });
-
-      paystackReq.write(params);
-      paystackReq.end();
+      body: JSON.stringify(body),
     });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      return new Response(JSON.stringify({ error: data.message || 'Failed to initiate transaction' }), { status: res.status });
+    }
+
+    return new Response(JSON.stringify(data), { status: 200 });
+
   } catch (error) {
     return new Response(JSON.stringify({ error: 'Internal Server Error' }), { status: 500 });
   }
