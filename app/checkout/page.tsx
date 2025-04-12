@@ -2,7 +2,7 @@
 import {useState} from 'react'
 import Image from 'next/image'
 import { useItemsContext } from '@/context/itemsContext'
-import PaystackPop from '@paystack/inline-js'
+// import PaystackPop from '@paystack/inline-js'
 
 const Page = () => {
   const {cart, removeItem, updateQuantity} = useItemsContext()
@@ -58,8 +58,11 @@ const Page = () => {
 
       if (data) {
         console.log(data.access_code)
-        const popup = new PaystackPop();
-        popup.resumeTransaction(data.access_code);
+        if (data) {
+          const { default: PaystackPop } = await import("@paystack/inline-js"); // 👈 only import on client
+          const popup = new PaystackPop();
+          popup.resumeTransaction(data.access_code);
+        }
       }
     } catch (err: any) {
       setError(err.message);
