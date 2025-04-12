@@ -19,23 +19,38 @@ export async function POST(req: NextRequest) {
   if (event.event === "charge.success") {
     const paymentData = event.data;
 
+    console.log("PAYMENT METADATA:", JSON.stringify(paymentData.metadata, null, 2));
+    console.log("PAYMENT DATA:", JSON.stringify(paymentData, null, 2));
 
     // Extract Order Details
+    // const orderDetails = {
+    //   // userId: paymentData.metadata.userId, // Pass user ID from metadata
+    //   // orderId: paymentData.metadata.orderId, // Pass order ID from metadata
+    //   // status: "paid",
+    //   // paymentMethod: paymentData.channel,
+    //   orderId: paymentData.reference,
+    //   amount: paymentData.amount / 100, // Convert kobo to currency
+    //   createdAt: new Date(),
+    //   phone: paymentData.metadata.phone_number,
+    //   email: paymentData.email,
+    //   customer: paymentData.metadata.full_name,
+    //   address: paymentData.metadata.address,
+    //   items: paymentData.metadata.items,
+    //   deliveryFee: paymentData.metadata.delivery_fee,
+    // };
+
     const orderDetails = {
-      // userId: paymentData.metadata.userId, // Pass user ID from metadata
-      // status: "paid",
       orderId: paymentData.reference,
-      amount: paymentData.amount / 100, // Convert kobo to currency
-      // paymentMethod: paymentData.channel,
+      amount: paymentData.amount / 100,
       createdAt: new Date(),
-      phone: paymentData.metadata.phone_number,
-      email: paymentData.email,
-      customer: paymentData.metadata.full_name,
-      address: paymentData.metadata.address,
-      items: paymentData.metadata.items,
-      deliveryFee: paymentData.metadata.delivery_fee,
-      // orderId: paymentData.metadata.orderId, // Pass order ID from metadata
+      phone: paymentData.metadata?.phone_number ?? null,
+      email: paymentData.email ?? null,
+      customer: paymentData.metadata?.full_name ?? null,
+      address: paymentData.metadata?.address ?? null,
+      items: paymentData.metadata?.items ?? [],
+      deliveryFee: paymentData.metadata?.delivery_fee ?? 0,
     };
+    
 
     // Save Order to Firebase (Firestore)
     await setDoc(doc(db, "orders", paymentData.reference), orderDetails);

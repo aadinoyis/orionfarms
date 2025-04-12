@@ -1,6 +1,7 @@
 export async function POST(req: Request) {
   try {
     const { phone, email, amount, customer, address, items, deliveryFee } = await req.json();
+    // console.log("Request Body:", { phone, email, amount, customer, address, items, deliveryFee });
 
     if (!email || !amount) {
       return new Response(JSON.stringify({ error: 'Email and amount are required' }), { status: 400 });

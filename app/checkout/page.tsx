@@ -32,7 +32,7 @@ const Page = () => {
     setLoading(true);
     setError("");
 
-    console.log(customerDetails.email, total)
+    // console.log(customerDetails.phone, total)
 
     try {
       // const response = await fetch("/api/complete-checkout", {
