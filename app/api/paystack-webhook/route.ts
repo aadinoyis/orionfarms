@@ -19,8 +19,13 @@ export async function POST(req: NextRequest) {
   if (event.event === "charge.success") {
     const paymentData = event.data;
 
-    console.log("PAYMENT METADATA:", JSON.stringify(paymentData.metadata, null, 2));
-    console.log("PAYMENT DATA:", JSON.stringify(paymentData, null, 2));
+    // console.log("PAYMENT METADATA:", JSON.stringify(paymentData.metadata, null, 2));
+    // console.log("PAYMENT DATA:", JSON.stringify(paymentData, null, 2));
+
+    function getCustomField(metadata: any, key: string) {
+      return metadata?.custom_fields?.find((field: any) => field.variable_name === key)?.value ?? null;
+    }
+    
 
     // Extract Order Details
     // const orderDetails = {
@@ -43,13 +48,16 @@ export async function POST(req: NextRequest) {
       orderId: paymentData.reference,
       amount: paymentData.amount / 100,
       createdAt: new Date(),
-      phone: paymentData.metadata?.phone_number ?? null,
+      phone: getCustomField(paymentData.metadata, "phone_number"),
       email: paymentData.email ?? null,
-      customer: paymentData.metadata?.full_name ?? null,
-      address: paymentData.metadata?.address ?? null,
-      items: paymentData.metadata?.items ?? [],
-      deliveryFee: paymentData.metadata?.delivery_fee ?? 0,
+      customer: getCustomField(paymentData.metadata, "full_name"),
+      address: getCustomField(paymentData.metadata, "address"),
+      items: getCustomField(paymentData.metadata, "items"),
+      deliveryFee: parseFloat(getCustomField(paymentData.metadata, "delivery_fee")) || 0,
     };
+
+    console.log("Extracted orderDetails:", orderDetails);
+    
     
 
     // Save Order to Firebase (Firestore)
