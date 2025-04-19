@@ -47,9 +47,10 @@ export async function POST(req: NextRequest) {
     const orderDetails = {
       orderId: paymentData.reference,
       amount: paymentData.amount / 100,
+      status: paymentData.status,
       createdAt: new Date(),
       phone: getCustomField(paymentData.metadata, "phone_number"),
-      email: paymentData.email ?? null,
+      email: paymentData.customer.email ?? null,
       customer: getCustomField(paymentData.metadata, "full_name"),
       address: getCustomField(paymentData.metadata, "address"),
       items: getCustomField(paymentData.metadata, "items"),
@@ -58,8 +59,6 @@ export async function POST(req: NextRequest) {
 
     console.log("Extracted orderDetails:", orderDetails);
     
-    
-
     // Save Order to Firebase (Firestore)
     await setDoc(doc(db, "orders", paymentData.reference), orderDetails);
 

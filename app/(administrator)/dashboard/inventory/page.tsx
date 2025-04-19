@@ -80,10 +80,10 @@ const Inventory = () => {
         {
           items?
           items.map(item => (
-            <tr key={item.id} className="w-full border p-2 border-gray-400">
-              <td className="text-bold text-[#2d2df1] p-2 border border-gray-400">{item.name}</td>
+            <tr key={item.id} className="w-full border border-gray-400">
+              <td className="text-bold text-[#2d2df1] p-1 border border-gray-400">{item.name}</td>
 
-              <td className="h-[80px] w-[80px] rounded-sm p-2 border border-gray-400">
+              <td className="h-[45px] w-[45px] rounded-sm p-1 border border-gray-400">
                 <Image
                   src={item.imageUrl[0]} 
                   alt={"Orion Farms"}
@@ -93,24 +93,24 @@ const Inventory = () => {
                 />
               </td>  
 
-              <td className='p-2 max-w-[300px] overflow-x-scroll border border-gray-400'>
+              <td className='p-1 max-w-[300px] overflow-x-scroll border border-gray-400'>
                 <p className="text-sm">{item.description}</p>
               </td>
 
-              <td className="text-sm text-bold text-[#2d2df1] p-2 border border-gray-400">
+              <td className="text-sm text-bold text-[#2d2df1] p-1 border border-gray-400">
                 {
-                  item.category.join(', ')
+                  item.category
                 }
               </td>
 
-              <td className="text-bold text-[#2d2df1] p-2 border border-gray-400">{item.unit}</td>
-              <td className="text-bold text-[#2d2df1] p-2 border border-gray-400">{item.quantity}</td>
-              <td className="text-bold text-[#2d2df1] p-2 border border-gray-400">{item.price}</td>
+              <td className="text-bold text-[#2d2df1] p-1 border border-gray-400">{item.unit}</td>
+              <td className="text-bold text-[#2d2df1] p-1 border border-gray-400">{item.quantity}</td>
+              <td className="text-bold text-[#2d2df1] p-1 border border-gray-400">{item.price}</td>
 
-              <td className='p-2 border border-gray-400 text-center'>
+              <td className='p-1 border border-gray-400 text-center'>
                 <Link href={`/dashboard/inventory?query=edit`} className="px-4 py-2 border-1 border-[#2d2df1] rounded-full text-[#2d2df1]">Update</Link>
               </td>
-              <td className='p-2 border border-gray-400 text-center'>
+              <td className='p-1 border border-gray-400 text-center'>
                 <button onClick={() => handleDelete(item.id)} className="px-4 py-2 border-1 border-[#2d2df1] rounded-full text-[#2d2df1]">Delete</button>
               </td>
               

@@ -3,16 +3,30 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import Toast from "./toast";
-import { addInventoryItem, getInventoryItem, updateInventoryItem, uploadImages } from "@/utils/inventory";
+import { getOrder } from "@/utils/invoice";
+
+
+interface Invoice {
+  customer: string;
+  phone: string;
+  email: string;
+  address: string;
+  amount: number;
+  deliveryFee: number;
+  createdAt: Date;
+  items: Item[];
+  status: string;
+}
 
 interface Item {
   id: string;
   name: string;
+  description?: string;
   price: number;
-  unit: string;
   quantity: number;
-  imageUrl?: string[];
-  total: string;
+  imageUrl: string[];
+  category: string[];
+  unit: string;
 }
 
 interface Params {
@@ -24,7 +38,7 @@ const GetOrders = ({ id }: Params) => {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
 
-  const [data, setData] = useState<Item[]>([]);
+  const [data, setData] = useState<Invoice>();
 
   // Fetch item if `id` exists (edit mode)
   useEffect(() => {
@@ -32,13 +46,13 @@ const GetOrders = ({ id }: Params) => {
       const fetchItem = async () => {
         setLoading(true);
         try {
-          const item = await getInventoryItem(id); // Ensure this returns a full `Item` object
-          if (item) {
-            const { id, ...itemData } = item; // Remove id from the object
-            setData([itemData as Item]);
+          const order = await getOrder(id); // Ensure this returns a full `Item` object
+          if (order) {
+            const { id, ...orderData } = order; // Remove id from the object
+            setData(orderData as Invoice);
           }
         } catch (error) {
-          console.error("Error fetching item:", error);
+          console.error("Error fetching order:", error);
         }
         setLoading(false);
       };
@@ -52,9 +66,9 @@ const GetOrders = ({ id }: Params) => {
         <table className="w-full border border-gray-400 text-nowrap">
           <thead className='w-full border border-gray-400 border-collapse'>
             <tr>
-              <th className='p-2 border border-gray-400'>Id</th>
+              {/* <th className='p-2 border border-gray-400'>Id</th> */}
               {/* <th className='p-2 border border-gray-400'>Image</th> */}
-              <th className='p-2 border border-gray-400'>Title</th>
+              <th className='p-2 border border-gray-400'>Item</th>
               <th className='p-2 border border-gray-400'>Price</th>
               <th className='p-2 border border-gray-400'>Qty</th>
               <th className='p-2 border border-gray-400'>Subtotal</th>
@@ -62,9 +76,10 @@ const GetOrders = ({ id }: Params) => {
           </thead>
           <tbody className='text-sm'>
             {
-              data.map(item => (
+              data &&
+              data.items.map(item => (
                 <tr key={item.id} className="w-full border p-2 border-gray-400">
-                  <td className="text-bold p-2 border border-gray-400">{item.id}</td>
+                  {/* <td className="text-bold p-2 border border-gray-400">{item.id}</td> */}
                   {/* <td className="h-[80px] w-[80px] rounded-sm p-2 border border-gray-400">
                     <Image
                       src={item.imageUrl[0]} 
@@ -77,20 +92,20 @@ const GetOrders = ({ id }: Params) => {
                   <td className="text-bold p-2 border border-gray-400">{item.name}</td>
                   <td className="text-bold p-2 border border-gray-400">NGN {item.price}/{item.unit}</td>
                   
-                  <td className="text-bold p-2 border border-gray-400">NGN {item.total}</td>
                   <td className="text-bold p-2 border border-gray-400">{item.quantity}</td>
+                  <td className="text-bold p-2 border border-gray-400">NGN {item.price * item.quantity}</td>
                 </tr>
               ))
             }
               <tr>
                 <td className="text-bold p-2 border-b border-gray-400">Delivery</td>
-                <td className="text-bold p-2 border-b border-gray-400" colSpan={3}></td>
-                <td className="text-bold p-2 border-b border-gray-400">20,000</td>
+                <td className="text-bold p-2 border-b border-gray-400" colSpan={2}></td>
+                <td className="text-bold p-2 border-b border-gray-400">NGN {data?.deliveryFee}</td>
               </tr>
               <tr>
                 <td className="text-bold p-2 border-b border-gray-400">Total</td>
-                <td className="text-bold p-2 border-b border-gray-400" colSpan={3}></td>
-                <td className="text-bold p-2 border-b border-gray-400">40,0000</td>
+                <td className="text-bold p-2 border-b border-gray-400" colSpan={2}></td>
+                <td className="text-bold p-2 border-b border-gray-400">NGN {data?.amount}</td>
               </tr>
           </tbody>
         </table>

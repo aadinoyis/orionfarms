@@ -1,17 +1,17 @@
 "use client"
 
 import React, {createContext, useContext, useState, ReactNode} from "react"
-import { blogs } from "@/data/blogs"
+import {getAllBlogs} from "@/utils/blog"
 
 
-type BlogType = {
-  id: string,
-  title: string,
-  category: string,
-  date: string,
-  images: string[],
-  description: string,
-  read: string,
+interface BlogType {
+  id: string;
+  title: string;
+  description: string;
+  createdAt: Date;
+  imageUrl: string[];
+  category: string;
+  reads: number;
 }
 
 type BlogContextType = {
@@ -19,14 +19,14 @@ type BlogContextType = {
 }
 
 // Sample Blog Data
-const sampleBlog: BlogType[] = blogs;
+const blogsData: BlogType[] = await getAllBlogs();
 
 // Initialize blog context
 const BlogsContext = createContext<BlogContextType | undefined>(undefined)
 
 // Context Provider
 export const BlogsProvider = ({ children }: { children: ReactNode }) => {
-  const [blogs] = useState<BlogType[]>(sampleBlog)
+  const [blogs] = useState<BlogType[]>(blogsData)
   
   return (
     <BlogsContext.Provider value={{

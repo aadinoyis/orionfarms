@@ -1,36 +1,62 @@
 'use client'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { Suspense } from 'react'
 import CreateBlog from '@/app/components/create-blog'
+import { getAllBlogs, deleteBlog } from '@/utils/blog'
+import { format } from 'date-fns'
 
-const blogs = [
-  {
-    id: "127",
-    title: "Importance of saving cash",
-    category: ["Finance"],
-    date: "Thursday, 14 Feb, 2025",
-    images: ["/images/founder.jpg"],
-    description: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Est at maxime soluta nulla molestias quisquam, nobis deserunt molestiae ab! Ducimus fugiat exercitationem ex illum labore quasi officia voluptate culpa nobis cum, velit, perspiciatis eum id neque, porro non deserunt molestias odit. Tempore, expedita ratione corporis recusandae eius aut. Doloremque magni quae, expedita praesentium suscipit voluptatem veniam modi excepturi nemo pariatur odit, nam consequatur optio repudiandae omnis repellat. Possimus rem qui facilis, fugit alias iusto adipisci voluptatem facere, minima magni! Minima sapiente accusamus nulla.",
-    read: "0",
-  },
-  {
-    id: "143",
-    title: "Impact of Orion Farms on Education",
-    category: ["Story"],
-    date: "Thursday, 10 March, 2025",
-    images: ["/images/student-service-1.png"],
-    description: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Est at maxime soluta nulla molestias quisquam, nobis deserunt molestiae ab! Ducimus fugiat exercitationem ex illum labore quasi officia voluptate culpa nobis cum, velit, perspiciatis eum id neque, porro non deserunt molestias odit. Tempore, expedita ratione corporis recusandae eius aut. Doloremque magni quae, expedita praesentium suscipit voluptatem veniam modi excepturi nemo pariatur odit, nam consequatur optio repudiandae omnis repellat. Possimus rem qui facilis, fugit alias iusto adipisci voluptatem facere, minima magni! Minima sapiente accusamus nulla.",
-    read: "0",
-  },
-]
+
+interface Blog {
+  id: string;
+  title: string;
+  description: string;
+  imageUrl: string[];
+  category: string;
+  reads: number;
+  createdAt: Date;
+}
 
 const Inventory = () => {
   const router = useRouter()
   const searchParams = useSearchParams()
+  const [message, setMessage] = useState<string | null>(null);
   const query = searchParams.get('query')
+
+  const [blogs, setBlogs] = useState<Blog[] | null>(null)
+
+  const handleDelete = async (id: string) => {
+    try {
+      await deleteBlog(id)
+      setMessage('Blog deleted successfully')
+      router.refresh()
+    }
+    catch (error) {
+      setMessage('Error deleting blog')
+      router.refresh()
+    }
+  }
+
+  useEffect(() => {
+    const fetchItems = async () => {
+      const data = await getAllBlogs();
+      const formattedData = data.map((blog) => ({
+        id: blog.id,
+        title: blog.title,
+        reads: blog.reads,
+        description: blog.description,
+        imageUrl: blog.imageUrl,
+        category: blog.category,
+        createdAt: blog.createdAt,
+      }));
+
+      setBlogs(formattedData);
+    };
+
+    fetchItems();
+  }, []);
 
   return (
     <section className="w-full overflow-x-scroll"> 
@@ -50,6 +76,7 @@ const Inventory = () => {
         </thead>
         <tbody className='text-sm'>
         {
+          blogs ?
           blogs.map(blog => (
             <tr key={blog.id} className="w-full border p-2 border-gray-400">
               <td className='p-2 max-w-[300px] overflow-x-scroll border border-gray-400'>
@@ -58,7 +85,7 @@ const Inventory = () => {
 
               <td className="h-[80px] w-[80px] rounded-sm p-2 border border-gray-400">
                 <Image
-                  src={blog.images[0]} 
+                  src={blog.imageUrl[0]} 
                   alt={"Orion Farms"}
                   width={2750}
                   height={1536}
@@ -72,19 +99,30 @@ const Inventory = () => {
 
               <td className="text-sm text-bold text-[#2d2df1] p-2 border border-gray-400">
                 {
-                  blog.category.join(', ')
+                  blog.category
                 }
               </td>
 
-              <td className="text-bold text-[#2d2df1] p-2 border border-gray-400">{blog.date}</td>
-              <td className="text-bold text-[#2d2df1] p-2 border border-gray-400">{blog.read}</td>
+              <td className="text-bold text-[#2d2df1] p-2 border border-gray-400">{blog.createdAt ? format(blog.createdAt, "dd MMM yyyy") : "No date"}</td>
+              <td className="text-bold text-[#2d2df1] p-2 border border-gray-400">{blog.reads}</td>
 
               <td className='p-2 border border-gray-400 text-center'>
                 <Link href={`/dashboard/blogs?query=edit&prod=${blog.id}`} className="px-4 py-2 border-1 border-[#2d2df1] rounded-full text-[#2d2df1]">Update</Link>
               </td>
-
+              
+              <td className='p-2 border border-gray-400 text-center'>
+                <button onClick={() => handleDelete(blog.id)} className="px-4 py-2 border-1 border-[#2d2df1] rounded-full text-[#2d2df1]">Delete</button>
+              </td>
+              {
+                query == 'edit' &&
+                <CreateBlog id={blog.id}/>
+              }
             </tr>
           ))
+          :
+          <tr>
+            <td colSpan={8} className='text-center'>No blog yet</td>
+          </tr>
         }
         </tbody>
       </table>
@@ -94,10 +132,6 @@ const Inventory = () => {
         <CreateBlog/>
       }
 
-      {
-        query == 'edit' &&
-        <CreateBlog/>
-      }
     </section>     
   )
 }

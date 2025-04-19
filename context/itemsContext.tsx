@@ -1,8 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useState, ReactNode } from "react";
-import { items } from "@/data/items";
-import { getInventoryItems, deleteInventoryItem } from "@/utils/inventory";
+import { getInventoryItems } from "@/utils/inventory";
 
 
 // Define the shape of a product
@@ -31,19 +30,22 @@ interface ProductContextType {
   addItem: (prodId: string) => void;
   removeItem: (prodId: string) => void;
   updateQuantity: (prodId: string, quantity: number) => void;
+  categories: string[];
 }
 
 // Initialize ProductContext
 const ItemsContext = createContext<ProductContextType | undefined>(undefined);
 
 // Sample initial data
-const initialProducts = await getInventoryItems()
+const initialProducts = await getInventoryItems();
+const allCategories = initialProducts.map(item => item.category.join(', '));
 
 // Context provider
 export const ItemsProvider = ({ children }: { children: ReactNode }) => {
   const [items] = useState<Item[]>(initialProducts);
   const [itemId] = useState<string>("");
   const [cart, setCart] = useState<CartItem[]>([]);
+  const [categories] = useState<string[]>(allCategories);
 
   // Add item to the cart
   const addItem = (itemId: string) => {
@@ -105,7 +107,8 @@ export const ItemsProvider = ({ children }: { children: ReactNode }) => {
         cart,
         addItem,
         removeItem,
-        updateQuantity
+        updateQuantity,
+        categories
       }}
     >
       {children}

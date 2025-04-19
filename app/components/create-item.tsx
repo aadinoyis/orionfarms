@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import Toast from "./toast";
-import { addInventoryItem, getInventoryItem, updateInventoryItem, uploadImages } from "@/utils/inventory";
+import { addInventoryItem, getInventoryItem, updateInventoryItem, } from "@/utils/inventory";
 
 interface Item {
   name: string;
@@ -64,6 +64,28 @@ const CreateItem = ({ id }: Params) => {
     }
   }, [id]);
 
+  const uploadImages = async (files: FileList) => {
+    const urls: string[] = [];
+  
+    for (const file of Array.from(files)) {
+      const formData = new FormData();
+      formData.append('file', file);
+  
+      const res = await fetch('/api/upload', {
+        method: 'POST',
+        body: formData,
+      });
+  
+      const data = await res.json();
+      if (data.secure_url) {
+        urls.push(data.secure_url);
+      }
+    }
+  
+    return urls;
+  };
+  
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -75,7 +97,7 @@ const CreateItem = ({ id }: Params) => {
 
         await updateInventoryItem(id, {
           ...data,
-          imageUrl: data.imageUrl?.map((item) => item.trim()),
+          imageUrl: imageUrls.length > 0 ? imageUrls : data.imageUrl,
           category: data.category?.toString().split(',')?.map((item) => item.trim()),
         });
         setMessage("Item updated!");
@@ -85,7 +107,7 @@ const CreateItem = ({ id }: Params) => {
 
         await addInventoryItem({
           ...data,
-          imageUrl: data.imageUrl?.map((item) => item.trim()),
+          imageUrl: imageUrls.length > 0 ? imageUrls : data.imageUrl,
           category: data.category?.toString().split(',').map((item) => item.trim()),
         });
         setMessage("Item added!");

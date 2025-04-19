@@ -5,6 +5,8 @@ import Link from 'next/link'
 import { useBlogsContext } from '@/context/blogsContext'
 import { useSearchParams } from 'next/navigation'
 import { Suspense } from 'react'
+import { format } from 'date-fns'
+
 
 const Blog = () => {
   const searchParams = useSearchParams()
@@ -26,13 +28,13 @@ const Blog = () => {
 
               <div>
                 <h2 className="text-xl">{blog.category}</h2>
-                <span className="text-sm">Posted: <strong>{blog.date}</strong></span>
+                <span className="text-sm">Posted: <strong>{blog.createdAt ? format(blog.createdAt, "dd MMM yyyy") : "No date"}</strong></span>
               </div>
 
               <div className="flex flex-col gap-8 w-full max-w-[800px]">
                 <div className="w-full h-[400px] shrink-0 bg-[#2d2df1] rounded-sm">
                   <Image
-                    src={blog.images[0]} 
+                    src={blog.imageUrl[0]} 
                     alt={"Orion Farms"}
                     width={2750}
                     height={1536}
@@ -67,12 +69,12 @@ const Blog = () => {
                 <li key={blog.id} className="shrink-0 flex gap-2 max-w-[400px]">
                   <div>
                     <h2 className="text-xl">{blog.title}</h2>
-                    <span className="text-sm">Posted: <strong>{blog.date}</strong></span>
+                    <span className="text-sm">Posted: <strong>{blog.createdAt ? format(blog.createdAt, "dd MMM yyyy") : "No date"}</strong></span>
                   </div>
 
                   <Link href={`/blog?current=${blog.id}`} className="w-[100px] h-[100px] shrink-0 bg-[#2d2df1] rounded-sm p-2">
                     <Image
-                      src={blog.images[0]} 
+                      src={blog.imageUrl[0]} 
                       alt={"Orion Farms"}
                       width={2750}
                       height={1536}
