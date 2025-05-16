@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import * as motion from "motion/react-client"
 
 
 const faq = [
@@ -22,37 +23,46 @@ export default function Home() {
     <div className="w-full min-h-screen px-4 gap-16 sm:px-20 font-[family-name:var(--lexend)]">
       <main className="py-8 w-full flex flex-col gap-24">
         <section className="flex flex-col gap-8 w-full">
-          <div className="w-full flex flex-col gap-8 text-center">
-            <div>
-              <span className="px-2 py-2 border-1 border-[#2d2df1] rounded-full text-[#2d2df1] text-sm">Welcome to Orion Farms!</span>
-            </div>
+          <div className="w-full flex flex-col gap-8">
             
-            <h1 className="sm:text-6xl text-4xl">
-              <strong>Experience The <br /></strong> <em>Future of Agriculture <br /></em>
-              <strong>Through Our Farm.</strong>
-            </h1>
+           
+            {/* <div>
+              <h3 className="text-4xl text-[#2d2df1]">
+                Orion farms is your strategic partner in farming and agro-allied business, Experience The Future of Agriculture Through Our Farm.
+              </h3>
+              </div> */}
+            {/* <h1 className="text-6xl">
+              Farm Experience Like no <span className="bg-[#2d2df1] text-[#ddddf2]">other</span>
+            </h1> */}
+            <motion.h1 initial={{width: 0}} animate={{width: "100%"}} transition={{duration: 2}} className="text-6xl overflow-hidden">
+              Shaping the future of <span className="bg-[#2d2df1] text-[#ddddf2]">Agriculture</span>
+            </motion.h1>
+            <p>
+              Orion farms is your strategic partner in farming and agro-allied business, Experience The Future of Agriculture Through Our Farm.
+            </p>
 
-            <p>Orion farms is your strategic partner when it comes to starting your farm business!</p>
-            
-            
-            
+            <div className="flex gap-4">
+              <Link href="/shop" className="px-4 py-2 border-1 border-[#2d2df1] rounded-full text-[#2d2df1]">Learn More</Link>
+              <Link href="/shop" className="px-4 py-2 border-1 border-[#2d2df1] rounded-full text-[#2d2df1]">Shop Now</Link>
+            </div>
+
           </div>
-          <div className="relative w-full h-[500px] rounded-sm bg-[#2d2df1]">
-            <Image
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 2.5 }} className="relative w-full h-[500px] rounded-xl bg-[#2d2df1]">
+            {/* <Image
               src={"/images/logo-transparent.png"} 
               alt={"Orion Farms"}
               width={2750}
               height={1536}
               className="w-[150px] h-auto shrink-0 absolute top-0 left-0"
-            />
+            /> */}
             <Image
               src={"/images/hero-image.jpg"} 
               alt={"Orion Farms"}
               width={2750}
               height={1536}
-              className="w-[100%] h-[100%] object-cover shrink-0 rounded-sm"
+              className="w-[100%] h-[100%] object-cover shrink-0 rounded-xl"
             />
-          </div>
+          </motion.div>
         </section>
 
         <section className="flex flex-col gap-4">
@@ -69,17 +79,18 @@ export default function Home() {
 
         <section className="w-full" id="services">
           <div className="w-full">  
-            <h1 className="sm:text-6xl text-4xl">
-              <strong>Take a Look at</strong><br />
-              <em>Our Cutting Edge </em><br />
-              <strong>Services For You!</strong>
+            <h1 className="text-6xl">
+              Shop from us, Eat at our restaurant, Wear our leather.
             </h1>
+            <br />
+            <p>At Orions Farms, it is&apos;t just about production of farm produce, it is making sure you get the best experience.</p>
+            
           </div>
 
           <div>
-            <ul>
-              <li className="w-full flex flex-col sm:flex-row gap-8 py-4">
-                <div className="max-w-[300px] flex gap-4">
+            <ul className="w-min-full flex overflow-x-scroll">
+              <li className="w-full flex-grow min-w-[300px] flex flex-col gap-8 py-4">
+                <div className="flex gap-4">
                   <div className="text-sm">01</div>
                   <div className="flex flex-col gap-4">
                     <h3 className="text-3xl text-bolder text-[#2d2df1]">Restaurant</h3>
@@ -96,19 +107,19 @@ export default function Home() {
                 </div>
 
                 <div className="w-full flex gap-8">
-                  <div className="w-full flex items-end justify-end h-[400px] overflow-hidden rounded-sm bg-[#2d2df1]">
+                  <div className="w-full flex items-center justify-center h-[400px] overflow-hidden rounded-sm bg-[#2d2df1]">
                     <Image
                       src={"/images/penne-pasta-tomato-sauce-with-chicken-tomatoes-wooden-table.jpg"} 
                       alt={"Orion Farms"}
                       width={2750}
                       height={1536}
-                      className="w-[70%] h-[70%] object-cover rounded-sm shrink-0"
+                      className="w-[80%] h-[80%] object-cover rounded-sm shrink-0 border-[1px] border-[#ddddf2]"
                     />
                   </div>  
                 </div>
               </li>
-              <li className="w-full flex flex-col sm:flex-row gap-8 py-4">
-                <div className="max-w-[300px] flex gap-4">
+              <li className="w-full flex-grow min-w-[300px] flex flex-col gap-8 py-4">
+                <div className="flex gap-4">
                   <div className="text-sm">02</div>
                   <div className="flex flex-col gap-4">
                     <h3 className="text-3xl text-bolder text-[#2d2df1]">Egg shop</h3>
@@ -116,7 +127,6 @@ export default function Home() {
                     <p>
                       Our collected eggs from our healthy birds are always within your reach.
                       We make sure to give our birds the best treatment so that they can produce
-                      a good, healthy and big eggs for consumption.
                     </p>
 
                     <div>
@@ -126,19 +136,19 @@ export default function Home() {
                 </div>
 
                 <div className="w-full flex gap-8">
-                  <div className="w-full flex items-end justify-end h-[400px] overflow-hidden rounded-sm bg-[#2d2df1]">
+                  <div className="w-full flex items-center justify-center h-[400px] overflow-hidden rounded-sm bg-[#2d2df1]">
                     <Image
                       src={"/images/eggs.jpg"} 
                       alt={"Orion Farms"}
                       width={2750}
                       height={1536}
-                      className="w-[70%] h-[70%] object-cover rounded-sm shrink-0"
+                      className="w-[80%] h-[80%] object-cover rounded-sm shrink-0 border-[1px] border-[#ddddf2]"
                     />
                   </div>  
                 </div>
               </li>
-              <li className="w-full flex flex-col sm:flex-row gap-8 py-4">
-                <div className="max-w-[300px] flex gap-4">
+              <li className="w-full flex-grow min-w-[300px] flex flex-col gap-8 py-4">
+                <div className="flex gap-4">
                   <div className="text-sm">03</div>
                   <div className="flex flex-col gap-4">
                     <h3 className="text-3xl text-bolder text-[#2d2df1]">Leather shop</h3>
@@ -146,8 +156,6 @@ export default function Home() {
                     <p>
                       Explore our great selection of fine leather goods. 
                       People who love quality leather will appreciate our wide selection of exquisite ostrich leather products. 
-                      Handbags, belts, wallets and shoes are just some of what we have to offer. 
-                      From skins to the most exclusive handbag. You will find a wide range of classical and fashionable styles in various colors.
                     </p>
 
                     
@@ -158,13 +166,13 @@ export default function Home() {
                 </div>
 
                 <div className="w-full flex gap-8">
-                  <div className="w-full flex items-end justify-end h-[400px] overflow-hidden rounded-sm bg-[#2d2df1]">
+                  <div className="w-full flex items-center justify-center h-[400px] overflow-hidden rounded-sm bg-[#2d2df1]">
                     <Image
                       src={"/images/leather-texture-background.jpg"} 
                       alt={"Orion Farms"}
                       width={2750}
                       height={1536}
-                      className="w-[70%] h-[70%] object-cover rounded-sm shrink-0"
+                      className="w-[80%] h-[80%] object-cover rounded-sm shrink-0 border-[1px] border-[#ddddf2]"
                     />
                   </div>  
                 </div>
@@ -173,7 +181,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="w-full flex flex-col gap-8">
+        {/* <section className="w-full flex flex-col gap-8">
           <div className="w-full">  
             <h1 className="sm:text-6xl text-4xl">
               <strong>What We Create <br /> Through </strong> <em>Our Impact </em>
@@ -218,7 +226,7 @@ export default function Home() {
                 />
               </div>
           </div>
-        </section>
+        </section> */}
 
         <section className="flex flex-col gap-4">
           <div>
@@ -232,16 +240,16 @@ export default function Home() {
           </div>
         </section>
 
-        <aside className="flex flex-col gap-4 rounded-sm p-8 bg-black text-[#2d2df1] sm:text-6xl text-4xl text-center">
+        {/* <aside className="flex flex-col gap-4 rounded-sm p-8 bg-black text-[#2d2df1] sm:text-6xl text-4xl text-center">
           <div>
             Enjoy 10% Discount When You Shop From Our Website
           </div>
           <div>
             <Link href="/shop" className="px-4 py-2 border-1 border-[#2d2df1] rounded-full text-[#2d2df1]">Shop Now</Link>
           </div>
-        </aside>
+        </aside> */}
 
-        <section className="w-full flex flex-col gap-8">
+        {/* <section className="w-full flex flex-col gap-8">
           <div className="w-full">  
             <h1 className="sm:text-6xl text-4xl">
               <strong>Explore our <br />Farm In </strong> <em>Details</em>
@@ -364,16 +372,16 @@ export default function Home() {
               <Link href="/shop" className="px-4 py-2 border-1 border-[#2d2df1] rounded-full text-[#2d2df1]">Explore</Link>
             </div>
           </div>
-        </section>
+        </section> */}
 
-        <aside className="flex flex-col gap-4 rounded-sm p-8 bg-black text-[#2d2df1] sm:text-6xl text-4xl text-center">
+        {/* <aside className="flex flex-col gap-4 rounded-sm p-8 bg-black text-[#2d2df1] sm:text-6xl text-4xl text-center">
           <div>
             Enjoy 10% Discount When You Shop From Our Website
           </div>
           <div>
             <Link href="/shop" className="px-4 py-2 border-1 border-[#2d2df1] rounded-full text-[#2d2df1]">Shop Now</Link>
           </div>
-        </aside>
+        </aside> */}
 
         <section className="flex flex-col gap-4">
           <div>
@@ -387,7 +395,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="flex flex-col gap-8 bg-[#2d2df1] text-[#f0f0ff] p-8 rounded-sm" id="about">
+        {/* <section className="flex flex-col gap-8 bg-[#2d2df1] text-[#f0f0ff] p-8 rounded-sm" id="about">
           <div className="w-[100%]">  
             <h1 className="sm:text-6xl text-4xl">
               <strong>Who Are </strong>
@@ -406,7 +414,7 @@ export default function Home() {
             <br /><br />
             <Link href="/about"  className="max-w-[500px] px-4 py-2 border-1 border-[#f0f0ff] rounded-full text-[#f0f0ff] text-center">Learn More</Link>
           </div>
-        </section>
+        </section> */}
 
         {/* <section className="flex flex-col gap-8 bg-[#2d2df1] text-[#f0f0ff] p-8 rounded-sm" id="about">
           <div className="w-[100%]">  
@@ -444,7 +452,7 @@ export default function Home() {
           </div>
         </section> */}
 
-        <section className="w-full flex flex-col gap-8">
+        <section className="w-full flex flex-col gap-8 rounded-xl p-8 bg-black text-[#ddddf2]">
           <div className="w-full">  
             <h1 className="sm:text-6xl text-4xl">
               <strong>We Create Farms </strong><br />
@@ -457,31 +465,31 @@ export default function Home() {
           <div className="w-full">
             <ul className="w-full flex flex-col sm:flex-row justify-between gap-8">
               <li>
-                <h3 className="sm:text-8xl text-6xl text-[#2d2df1]">100+</h3>
+                <h3 className="text-8xl text-[#2d2df1]">100+</h3>
                 <p>Served consumer</p>
               </li>
               <li>
-                <h3 className="sm:text-8xl text-6xl text-[#2d2df1]">95%</h3>
+                <h3 className="text-8xl text-[#2d2df1]">95%</h3>
                 <p>Nationwide delivery</p>
               </li>
               <li>
-                <h3 className="sm:text-8xl text-6xl text-[#2d2df1]">2.2 M+</h3>
+                <h3 className="text-8xl text-[#2d2df1]">2.2 M+</h3>
                 <p>Yearly produce</p>
               </li>
             </ul>
           </div>
         </section>
 
-        <aside className="flex flex-col gap-4 rounded-sm p-8 bg-black text-[#2d2df1] sm:text-6xl text-4xl text-center">
+        {/* <aside className="flex flex-col gap-4 rounded-sm p-8 bg-black text-[#2d2df1] sm:text-6xl text-4xl text-center">
           <div>
             Enjoy 10% Discount When You Shop From Our Website
           </div>
           <div>
             <Link href="/shop" className="px-4 py-2 border-1 border-[#2d2df1] rounded-full text-[#2d2df1]">Shop Now</Link>
           </div>
-        </aside>
+        </aside> */}
 
-        <section className="flex flex-col gap-8" id="faq">
+        {/* <section className="flex flex-col gap-8" id="faq">
           <div className="w-full">  
             <h1 className="sm:text-6xl text-4xl">
               <strong>Frequently Asked </strong><br />
@@ -501,7 +509,7 @@ export default function Home() {
               }
             </ul>
           </div>
-        </section>
+        </section> */}
 
         <section className="flex flex-col gap-8" id="blog">
           <div className="w-full">  
