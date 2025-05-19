@@ -1,6 +1,22 @@
+"use client"
 import Image from "next/image";
 import Link from "next/link";
 import * as motion from "motion/react-client"
+import { useItemsContext } from '@/context/itemsContext'
+import { useEffect, useState } from "react";
+import { CartDocker } from "./components/cart";
+
+
+interface Item {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  quantity: number;
+  imageUrl: string[];
+  category: string[];
+  unit: string;
+}
 
 
 const faq = [
@@ -19,6 +35,30 @@ const faq = [
 ]
 
 export default function Home() {
+  const {items, addItem, categories} = useItemsContext()
+  const [isCart, setIsCart] = useState(false)  
+  const updateItem = (id:string) => {
+    addItem(id)
+    setIsCart(true)
+  }
+
+  const images = [
+    '/images/student-service-1.png',
+    '/images/student-service-2.png',
+    '/images/hero-image.jpg',
+  ];
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  // Automatically change the slide every 3 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 3000);
+
+    return () => clearInterval(interval); // Cleanup on unmount
+  }, [images.length]);
+
   return (
     <div className="w-full min-h-screen px-4 gap-16 sm:px-20 font-[family-name:var(--lexend)]">
       <main className="py-8 w-full flex flex-col gap-24">
@@ -34,35 +74,46 @@ export default function Home() {
             {/* <h1 className="text-6xl">
               Farm Experience Like no <span className="bg-[#2d2df1] text-[#ddddf2]">other</span>
             </h1> */}
-            <motion.h1 initial={{width: 0}} animate={{width: "100%"}} transition={{duration: 2}} className="text-6xl overflow-hidden">
+            <motion.div initial={{width: 0}} animate={{width: "100%"}} transition={{duration: 2}} className="text-6xl overflow-hidden">
+            <h1 className="text-6xl overflow-hidden">
               Shaping the future of <span className="bg-[#2d2df1] text-[#ddddf2]">Agriculture</span>
-            </motion.h1>
+            </h1>
+            </motion.div>
             <p>
               Orion farms is your strategic partner in farming and agro-allied business, Experience The Future of Agriculture Through Our Farm.
             </p>
 
             <div className="flex gap-4">
-              <Link href="/shop" className="px-4 py-2 border-1 border-[#2d2df1] rounded-full text-[#2d2df1]">Learn More</Link>
+              <Link href="/about" className="px-4 py-2 border-1 border-[#2d2df1] rounded-full text-[#2d2df1]">Learn More</Link>
               <Link href="/shop" className="px-4 py-2 border-1 border-[#2d2df1] rounded-full text-[#2d2df1]">Shop Now</Link>
             </div>
 
           </div>
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 2.5 }} className="relative w-full h-[500px] rounded-xl bg-[#2d2df1]">
-            {/* <Image
+          <div className="banner_img">
+            <div className="slider" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
+              {images.map((src, index) => (
+                <div key={index} className="slide">
+                  <Image alt={`Slide ${index + 1}`} src={src} width={2000} height={1000} />
+                </div>
+              ))}
+            </div>
+          </div>
+          {/* <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 2.5 }} className="relative w-full h-[500px] rounded-xl bg-[#2d2df1]">
+            <Image
               src={"/images/logo-transparent.png"} 
               alt={"Orion Farms"}
               width={2750}
               height={1536}
               className="w-[150px] h-auto shrink-0 absolute top-0 left-0"
-            /> */}
+            />
             <Image
               src={"/images/hero-image.jpg"} 
               alt={"Orion Farms"}
               width={2750}
               height={1536}
-              className="w-[100%] h-[100%] object-cover shrink-0 rounded-xl"
+              className="w-[100%] h-[100%] object-cover shrink-0 rounded-xl border-1 border-[#2d2df1]"
             />
-          </motion.div>
+          </motion.div> */}
         </section>
 
         <section className="flex flex-col gap-4">
@@ -80,106 +131,59 @@ export default function Home() {
         <section className="w-full" id="services">
           <div className="w-full">  
             <h1 className="text-6xl">
-              Shop from us, Eat at our restaurant, Wear our leather.
+              Shop from us.
             </h1>
             <br />
             <p>At Orions Farms, it is&apos;t just about production of farm produce, it is making sure you get the best experience.</p>
-            
+            <br />
           </div>
 
-          <div>
-            <ul className="w-min-full flex overflow-x-scroll">
-              <li className="w-full flex-grow min-w-[300px] flex flex-col gap-8 py-4">
-                <div className="flex gap-4">
-                  <div className="text-sm">01</div>
-                  <div className="flex flex-col gap-4">
-                    <h3 className="text-3xl text-bolder text-[#2d2df1]">Restaurant</h3>
-                
-                    <p>
-                      Please join us for breakfast or lunch in our farm style restaurant.
-                      The Hatchery offers fresh food and beautiful settings. Enjoy your lunch overlooking the ostriches.
-                    </p>
-
-                    <div>
-                      <Link href="/shop" className="px-4 py-2 border-1 border-[#2d2df1] rounded-full text-[#2d2df1]">Book Now</Link>
+          <div className="grid-view">
+            {
+              items?.map(item => (
+                <div key={item.id} className="p-2 rounded-xl border-1 border-[#2d2df1] border-dashed">
+                  <div className="w-full flex flex-col gap-2">
+                    <Link href={`/shop/${item.id}`}  className="w-full flex gap-8">
+                      <div className="w-full flex items-end justify-end h-[150px] sm:h-[200px] overflow-hidden rounded-xl bg-[#2d2df1]">
+                        <Image
+                          src={item.imageUrl[0]} 
+                          alt={"Orion Farms"}
+                          width={2750}
+                          height={1536}
+                          className="w-[100%] h-[100%] object-cover rounded-xl shrink-0"
+                        />
+                      </div>  
+                    </Link>
+                    <div className="flex flex-col gap-2">
+                      <div className="text-sm text-bold text-[#2d2df1] capitalize">
+                        {
+                          item.category
+                          // item.category.join(', ')
+                        }
+                      </div>
+                      <p className="max-h-[30px] text-xs overflow-hidden">
+                        {item.description}
+                      </p>
+  
+                      <div className='flex items-center justify-between'>
+                        <div className="text-bold text-sm text-[#2d2df1]">NGN {item.price}</div>
+                        <div>
+                          <button className="px-2 py-1 border-1 border-[#2d2df1] rounded-full text-[#2d2df1] text-sm" onClick={() => updateItem(item.id)}>Add +</button>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
-
-                <div className="w-full flex gap-8">
-                  <div className="w-full flex items-center justify-center h-[400px] overflow-hidden rounded-sm bg-[#2d2df1]">
-                    <Image
-                      src={"/images/penne-pasta-tomato-sauce-with-chicken-tomatoes-wooden-table.jpg"} 
-                      alt={"Orion Farms"}
-                      width={2750}
-                      height={1536}
-                      className="w-[80%] h-[80%] object-cover rounded-sm shrink-0 border-[1px] border-[#ddddf2]"
-                    />
-                  </div>  
-                </div>
-              </li>
-              <li className="w-full flex-grow min-w-[300px] flex flex-col gap-8 py-4">
-                <div className="flex gap-4">
-                  <div className="text-sm">02</div>
-                  <div className="flex flex-col gap-4">
-                    <h3 className="text-3xl text-bolder text-[#2d2df1]">Egg shop</h3>
-                
-                    <p>
-                      Our collected eggs from our healthy birds are always within your reach.
-                      We make sure to give our birds the best treatment so that they can produce
-                    </p>
-
-                    <div>
-                      <Link href="/shop" className="px-4 py-2 border-1 border-[#2d2df1] rounded-full text-[#2d2df1]">Book Now</Link>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="w-full flex gap-8">
-                  <div className="w-full flex items-center justify-center h-[400px] overflow-hidden rounded-sm bg-[#2d2df1]">
-                    <Image
-                      src={"/images/eggs.jpg"} 
-                      alt={"Orion Farms"}
-                      width={2750}
-                      height={1536}
-                      className="w-[80%] h-[80%] object-cover rounded-sm shrink-0 border-[1px] border-[#ddddf2]"
-                    />
-                  </div>  
-                </div>
-              </li>
-              <li className="w-full flex-grow min-w-[300px] flex flex-col gap-8 py-4">
-                <div className="flex gap-4">
-                  <div className="text-sm">03</div>
-                  <div className="flex flex-col gap-4">
-                    <h3 className="text-3xl text-bolder text-[#2d2df1]">Leather shop</h3>
-                
-                    <p>
-                      Explore our great selection of fine leather goods. 
-                      People who love quality leather will appreciate our wide selection of exquisite ostrich leather products. 
-                    </p>
-
-                    
-                    <div>
-                      <Link href="/shop" className="px-4 py-2 border-1 border-[#2d2df1] rounded-full text-[#2d2df1]">Book Now</Link>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="w-full flex gap-8">
-                  <div className="w-full flex items-center justify-center h-[400px] overflow-hidden rounded-sm bg-[#2d2df1]">
-                    <Image
-                      src={"/images/leather-texture-background.jpg"} 
-                      alt={"Orion Farms"}
-                      width={2750}
-                      height={1536}
-                      className="w-[80%] h-[80%] object-cover rounded-sm shrink-0 border-[1px] border-[#ddddf2]"
-                    />
-                  </div>  
-                </div>
-              </li>
-            </ul>
+              ))
+            }
           </div>
+
+          {
+            isCart &&
+            <CartDocker/>
+          }
         </section>
+        
 
         {/* <section className="w-full flex flex-col gap-8">
           <div className="w-full">  
@@ -189,40 +193,40 @@ export default function Home() {
           </div>
 
           <div className="w-full flex gap-8 overflow-x-scroll">
-              <div className="min-w-[240px] h-[320px] rounded-sm bg-[#2d2df1]">
+              <div className="min-w-[240px] h-[320px] rounded-xl bg-[#2d2df1]">
                 <Image
                   src={"/images/snail-gal.jpg"} 
                   alt={"Orion Farms"}
                   width={2750}
                   height={1536}
-                  className="w-[100%] h-[100%] object-cover rounded-sm shrink-0"
+                  className="w-[100%] h-[100%] object-cover rounded-xl shrink-0"
                 />
               </div>
-              <div className="min-w-[240px] h-[320px] rounded-sm bg-[#2d2df1]">
+              <div className="min-w-[240px] h-[320px] rounded-xl bg-[#2d2df1]">
                 <Image
                   src={"/images/difference-between-a-goat-and-a-ram.jpg"} 
                   alt={"Orion Farms"}
                   width={2750}
                   height={1536}
-                  className="w-[100%] h-[100%] object-cover rounded-sm shrink-0"
+                  className="w-[100%] h-[100%] object-cover rounded-xl shrink-0"
                 />
               </div>
-              <div className="min-w-[240px] h-[320px] rounded-sm bg-[#2d2df1]">
+              <div className="min-w-[240px] h-[320px] rounded-xl bg-[#2d2df1]">
                 <Image
                   src={"/images/hens-1528984922.jpg"} 
                   alt={"Orion Farms"}
                   width={2750}
                   height={1536}
-                  className="w-[100%] h-[100%] object-cover rounded-sm shrink-0"
+                  className="w-[100%] h-[100%] object-cover rounded-xl shrink-0"
                 />
               </div>
-              <div className="min-w-[240px] h-[320px] rounded-sm bg-[#2d2df1]">
+              <div className="min-w-[240px] h-[320px] rounded-xl bg-[#2d2df1]">
                 <Image
                   src={"/images/ram.jpg"} 
                   alt={"Orion Farms"}
                   width={2750}
                   height={1536}
-                  className="w-[100%] h-[100%] object-cover rounded-sm shrink-0"
+                  className="w-[100%] h-[100%] object-cover rounded-xl shrink-0"
                 />
               </div>
           </div>
@@ -240,7 +244,38 @@ export default function Home() {
           </div>
         </section>
 
-        {/* <aside className="flex flex-col gap-4 rounded-sm p-8 bg-black text-[#2d2df1] sm:text-6xl text-4xl text-center">
+        <section className="w-full p-8 border-1 border-[#2d2df1] rounded-xl border-dashed" id="services">
+        
+          <div className="w-full flex flex-col sm:items-center sm:flex-row gap-4">
+            <div className="w-full ">  
+              <h1 className="text-6xl">
+                Our restaurant.
+              </h1>
+              <br />
+              <p>
+                Join us for breakfast or lunch in our farm style restaurant.
+                The Hatchery offers fresh food and beautiful settings. Enjoy your lunch overlooking the ostriches.
+              </p>
+              <br />
+              <div>
+                <Link href="/shop" className="px-4 py-2 border-1 border-[#2d2df1] rounded-full text-[#2d2df1]">Book Now</Link>
+              </div>
+            </div>
+
+        
+            <div className="w-full flex items-center justify-center overflow-hidden rounded-xl bg-[#2d2df1]">
+              <Image
+                src={"/images/penne-pasta-tomato-sauce-with-chicken-tomatoes-wooden-table.jpg"} 
+                alt={"Orion Farms"}
+                width={2750}
+                height={1536}
+                className=" w-full h-[400px] object-cover shrink-0 border-[1px] border-[#ddddf2]"
+              />
+            </div>  
+          </div>
+        </section>
+
+        {/* <aside className="flex flex-col gap-4 rounded-xl p-8 bg-black text-[#2d2df1] sm:text-6xl text-4xl text-center">
           <div>
             Enjoy 10% Discount When You Shop From Our Website
           </div>
@@ -258,13 +293,13 @@ export default function Home() {
 
           <div className="w-full flex flex-col gap-4">
             <h3 className="text-4xl text-[#2d2df1]">Cows</h3>
-            <div className="w-full sm:h-[600px] h-[400px] rounded-sm bg-[#2d2df1] flex justify-center items-end">
+            <div className="w-full sm:h-[600px] h-[400px] rounded-xl bg-[#2d2df1] flex justify-center items-end">
               <Image
                 src={"/images/cowww.jpg"} 
                 alt={"Orion Farms"}
                 width={2750}
                 height={1536}
-                className="w-[80%] h-[80%] object-cover object-top rounded-sm shrink-0"
+                className="w-[80%] h-[80%] object-cover object-top rounded-xl shrink-0"
               />
             </div>
             
@@ -289,13 +324,13 @@ export default function Home() {
 
           <div className="w-full flex flex-col gap-4">
             <h3 className="text-4xl text-[#2d2df1]">Goats & Rams</h3>
-            <div className="w-full sm:h-[600px] h-[400px] rounded-sm bg-[#2d2df1] flex justify-center items-end">
+            <div className="w-full sm:h-[600px] h-[400px] rounded-xl bg-[#2d2df1] flex justify-center items-end">
               <Image
                 src={"/images/difference-between-a-goat-and-a-ram.jpg"} 
                 alt={"Orion Farms"}
                 width={2750}
                 height={1536}
-                className="w-[80%] h-[80%] object-cover object-top rounded-sm shrink-0"
+                className="w-[80%] h-[80%] object-cover object-top rounded-xl shrink-0"
               />
             </div>
             <div className="w-full flex flex-col gap-2">
@@ -323,13 +358,13 @@ export default function Home() {
 
           <div className="w-full flex flex-col gap-4">
             <h3 className="text-4xl text-[#2d2df1]">Chicken, Turkey & Guinea Fowl</h3>
-            <div className="w-full sm:h-[600px] h-[400px] rounded-sm bg-[#2d2df1] flex justify-center items-end">
+            <div className="w-full sm:h-[600px] h-[400px] rounded-xl bg-[#2d2df1] flex justify-center items-end">
               <Image
                 src={"/images/hens-1528984922.jpg"} 
                 alt={"Orion Farms"}
                 width={2750}
                 height={1536}
-                className="w-[80%] h-[80%] object-cover object-top rounded-sm shrink-0"
+                className="w-[80%] h-[80%] object-cover object-top rounded-xl shrink-0"
               />
             </div>
             <div className="w-full flex flex-col gap-2">
@@ -351,13 +386,13 @@ export default function Home() {
 
           <div className="w-full flex flex-col gap-4">
             <h3 className="text-4xl text-[#2d2df1]">Fresh Bush Jumbo Snails</h3>
-            <div className="w-full sm:h-[600px] h-[400px] rounded-sm bg-[#2d2df1] flex justify-center items-end">
+            <div className="w-full sm:h-[600px] h-[400px] rounded-xl bg-[#2d2df1] flex justify-center items-end">
               <Image
                 src={"/images/giant-african-land-snail-achatina-fulica-1372538221-7df6f8096ced45079873fa51f98c1c16.jpg"} 
                 alt={"Orion Farms"}
                 width={2750}
                 height={1536}
-                className="w-[80%] h-[80%] object-cover object-top rounded-sm shrink-0"
+                className="w-[80%] h-[80%] object-cover object-top rounded-xl shrink-0"
               />
             </div>
 
@@ -374,7 +409,7 @@ export default function Home() {
           </div>
         </section> */}
 
-        {/* <aside className="flex flex-col gap-4 rounded-sm p-8 bg-black text-[#2d2df1] sm:text-6xl text-4xl text-center">
+        {/* <aside className="flex flex-col gap-4 rounded-xl p-8 bg-black text-[#2d2df1] sm:text-6xl text-4xl text-center">
           <div>
             Enjoy 10% Discount When You Shop From Our Website
           </div>
@@ -395,7 +430,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* <section className="flex flex-col gap-8 bg-[#2d2df1] text-[#f0f0ff] p-8 rounded-sm" id="about">
+        {/* <section className="flex flex-col gap-8 bg-[#2d2df1] text-[#f0f0ff] p-8 rounded-xl" id="about">
           <div className="w-[100%]">  
             <h1 className="sm:text-6xl text-4xl">
               <strong>Who Are </strong>
@@ -416,15 +451,15 @@ export default function Home() {
           </div>
         </section> */}
 
-        {/* <section className="flex flex-col gap-8 bg-[#2d2df1] text-[#f0f0ff] p-8 rounded-sm" id="about">
+        
+        <section className="flex flex-col gap-8 bg-[#2d2df1] text-[#f0f0ff] p-8 rounded-xl" id="about">
           <div className="w-[100%]">  
-            <h1 className="sm:text-6xl text-4xl">
-              <strong>Initiatives and Support</strong>
-              <em>For Children</em>
+            <h1 className="text-6xl">
+              Initiatives and Support
             </h1>
           </div>
 
-          <div className="pl-8">
+          <div>
             <p>
               At Orion Farms, we believe that every child deserves access to quality education and resources that foster their growth and development. As a responsible and caring member of our community, we are committed to supporting the educational journey of our children in need.
 
@@ -434,24 +469,34 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="w-full flex flex-col sm:flex-row h-[auto] rounded-sm bg-[#2d2df1] gap-2 overflow-hidden">
-            <Image
+          <div className="w-full flex flex-col sm:flex-row h-[auto] rounded-xl bg-[#2d2df1] gap-2 overflow-hidden">
+            {/* <Image
               src={"/images/student-service-1.png"} 
               alt={"Orion Farms"}
               width={2750}
               height={1536}
-              className="grow w-full sm:w-[50%] h-[500px] object-cover shrink-0 rounded-sm"
-            />
+              className="grow w-full sm:w-[50%] h-[500px] object-cover shrink-0 rounded-xl"
+            /> */}
             <Image
               src={"/images/student-service-2.png"} 
               alt={"Orion Farms"}
               width={2750}
               height={1536}
-              className="grow w-full sm:w-[50%] h-[500px] object-cover shrink-0 rounded-sm"
+              className="grow w-full sm:w-[50%] h-[500px] object-cover shrink-0 rounded-xl"
             />
           </div>
-        </section> */}
+        </section>
+        <section className="flex flex-col gap-4">
+          <div>
+            <span className="px-2 py-2 border-1 border-[#2d2df1] rounded-full text-[#2d2df1] text-sm">About Us</span>
+          </div>
 
+          <div>
+            <h3 className="text-2xl text-[#2d2df1]">
+             Our vision is to systematically establish major poultry production facilities in different local communities, such that these networks of communities will become meaningful stakeholders and contributors to the Nigerian global food system.
+            </h3>
+          </div>
+        </section>
         <section className="w-full flex flex-col gap-8 rounded-xl p-8 bg-black text-[#ddddf2]">
           <div className="w-full">  
             <h1 className="sm:text-6xl text-4xl">
@@ -480,7 +525,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* <aside className="flex flex-col gap-4 rounded-sm p-8 bg-black text-[#2d2df1] sm:text-6xl text-4xl text-center">
+        {/* <aside className="flex flex-col gap-4 rounded-xl p-8 bg-black text-[#2d2df1] sm:text-6xl text-4xl text-center">
           <div>
             Enjoy 10% Discount When You Shop From Our Website
           </div>
@@ -527,13 +572,13 @@ export default function Home() {
                   <span className="text-sm">Posted: <strong>Thursday, 24 Jan, 2025</strong></span>
                 </div>
 
-                <div className="w-[100px] h-[100px] shrink-0 bg-[#2d2df1] rounded-sm p-2">
+                <div className="w-[100px] h-[100px] shrink-0 bg-[#2d2df1] rounded-xl p-2">
                   <Image
                     src={"/images/hens-1528984922.jpg"} 
                     alt={"Orion Farms"}
                     width={2750}
                     height={1536}
-                    className="w-[100%] h-[100%] object-cover object-top rounded-sm shrink-0"
+                    className="w-[100%] h-[100%] object-cover object-top rounded-xl shrink-0"
                   />
                 </div>
               </li>
@@ -543,13 +588,13 @@ export default function Home() {
                   <span className="text-sm">Posted: <strong>Thursday, 24 Jan, 2025</strong></span>
                 </div>
 
-                <div className="w-[100px] h-[100px] shrink-0 bg-[#2d2df1] rounded-sm p-2">
+                <div className="w-[100px] h-[100px] shrink-0 bg-[#2d2df1] rounded-xl p-2">
                   <Image
                     src={"/images/hens-1528984922.jpg"} 
                     alt={"Orion Farms"}
                     width={2750}
                     height={1536}
-                    className="w-[100%] h-[100%] object-cover object-top rounded-sm shrink-0"
+                    className="w-[100%] h-[100%] object-cover object-top rounded-xl shrink-0"
                   />
                 </div>
               </li>
@@ -559,13 +604,13 @@ export default function Home() {
                   <span className="text-sm">Posted: <strong>Thursday, 24 Jan, 2025</strong></span>
                 </div>
 
-                <div className="w-[100px] h-[100px] shrink-0 bg-[#2d2df1] rounded-sm p-2">
+                <div className="w-[100px] h-[100px] shrink-0 bg-[#2d2df1] rounded-xl p-2">
                   <Image
                     src={"/images/hens-1528984922.jpg"} 
                     alt={"Orion Farms"}
                     width={2750}
                     height={1536}
-                    className="w-[100%] h-[100%] object-cover object-top rounded-sm shrink-0"
+                    className="w-[100%] h-[100%] object-cover object-top rounded-xl shrink-0"
                   />
                 </div>
               </li>

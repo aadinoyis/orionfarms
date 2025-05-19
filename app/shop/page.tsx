@@ -47,20 +47,20 @@ const Page = () => {
 
   return (
     <div className="w-full min-h-screen px-4 gap-16 sm:px-20 font-[family-name:var(--lexend)]">
-      <main className="py-8 w-full flex flex-col gap-24">
+      <main className="py-8 w-full flex flex-col gap-8">
         <section className="flex flex-col gap-8">
           <div className="w-full">  
             <h1 className="sm:text-6xl text-4xl">
               <strong>Shop from our </strong><em>Farm </em>
             </h1>
           </div>
-          <div className="flex gap-4 py-8 overflow-x-scroll">
+          <div className="flex gap-2 py-4 overflow-x-scroll">
             <input type="text" value={searchQuery} onChange={e => setSearchQuery(e.target.value)} placeholder="Search" className="px-4 py-2 border-1 border-[#2d2df1] rounded-full text-[#2d2df1] whitespace-nowrap" />
-            <button className="px-4 py-2 border-1 border-[#2d2df1] rounded-full text-[#2d2df1] whitespace-nowrap" onClick={()=>handleClearSearch()}>Explore all</button>
+            <button className="px-4 py-1 border-1 border-[#2d2df1] rounded-full text-[#2d2df1] whitespace-nowrap" onClick={()=>handleClearSearch()}>All</button>
             
             {
               categories.map(category => (
-                <button onClick={()=>handleSearch(category)} key={category} className="px-4 py-2 border-1 border-[#2d2df1] rounded-full text-[#2d2df1] whitespace-nowrap">
+                <button onClick={()=>handleSearch(category)} key={category} className="px-4 py-1 border-1 border-[#2d2df1] rounded-full text-[#2d2df1] whitespace-nowrap capitalize">
                   <span >{category}</span>
                 </button>
               ))
@@ -82,36 +82,38 @@ const Page = () => {
           </div>
         </section>
 
-        <section className='flex flex-col sm:flex-row gap-4'>
+        <section className='grid-view'>
           {
             filteredItems?.map(item => (
-              <div key={item.id} className="max-w-[300px]">
-                <div className="w-full flex flex-col gap-4 py-4">
+              <div key={item.id} className="p-2 rounded-xl border-1 border-[#2d2df1] border-dashed">
+                <div className="w-full flex flex-col gap-2">
                   <Link href={`/shop/${item.id}`}  className="w-full flex gap-8">
-                    <div className="w-full flex items-end justify-end h-[200px] overflow-hidden rounded-sm bg-[#2d2df1]">
+                    <div className="w-full flex items-end justify-end h-[150px] sm:h-[200px] overflow-hidden rounded-xl bg-[#2d2df1]">
                       <Image
                         src={item.imageUrl[0]} 
                         alt={"Orion Farms"}
                         width={2750}
                         height={1536}
-                        className="w-[100%] h-[100%] object-cover rounded-sm shrink-0"
+                        className="w-[100%] h-[100%] object-cover rounded-xl shrink-0"
                       />
                     </div>  
                   </Link>
-                  <div className="flex flex-col gap-4">
-                    <div className="text-sm text-bold text-[#2d2df1]">
+                  <div className="flex flex-col gap-2">
+                    <div className="text-sm text-bold text-[#2d2df1] capitalize">
                       {
                         item.category
                         // item.category.join(', ')
                       }
                     </div>
-                    <p className="max-h-[40px] text-sm overflow-hidden">
+                    <p className="max-h-[30px] text-xs overflow-hidden">
                       {item.description}
                     </p>
-                    {/* <h3 className="text-3xl text-bolder">NGN 24,000</h3> */}
-                    <div className="text-bold text-[#2d2df1]">NGN {item.price}</div>
-                    <div>
-                      <button className="px-4 py-2 border-1 border-[#2d2df1] rounded-full text-[#2d2df1]" onClick={() => updateItem(item.id)}>Add to cart</button>
+
+                    <div className='flex items-center justify-between'>
+                      <div className="text-bold text-sm text-[#2d2df1]">NGN {item.price}</div>
+                      <div>
+                        <button className="px-2 py-1 border-1 border-[#2d2df1] rounded-full text-[#2d2df1] text-sm" onClick={() => updateItem(item.id)}>Add +</button>
+                      </div>
                     </div>
                   </div>
                 </div>

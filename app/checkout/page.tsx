@@ -85,20 +85,20 @@ const Page = () => {
           <table className="w-full max-w-sm border border-gray-400 text-nowrap">
             <thead className='w-full border border-gray-400 border-collapse'>
               <tr>
-                <th className='p-2 border border-gray-400'>Id</th>
-                <th className='p-2 border border-gray-400'>Image</th>
-                <th className='p-2 border border-gray-400'>Title</th>
+                <th className='p-2 border border-gray-400'>S/N</th>
+                <th className='p-2 border border-gray-400'>Item</th>
+                <th className='p-2 border border-gray-400'>Description</th>
                 <th className='p-2 border border-gray-400'>Price</th>
                 <th className='p-2 border border-gray-400'>Qty</th>
                 <th className='p-2 border border-gray-400'>Subtotal</th>
               </tr>
             </thead>
-            <tbody className='text-sm'>
+            <tbody className='text-xs'>
               {
-                cart.map(item => (
+                cart.map((item, index) => (
                   <tr key={item.id} className="w-full border p-2 border-gray-400">
-                    <td className="text-bold p-2 border border-gray-400">{item.id}</td>
-                    <td className="h-[80px] w-[80px] rounded-sm p-2 border border-gray-400">
+                    <td className="text-bold p-2 border border-gray-400">{index + 1}</td>
+                    <td className="h-[60px] w-[80px] rounded-sm p-2 border border-gray-400">
                       <Image
                         src={item.imageUrl[0]} 
                         alt={"Orion Farms"}

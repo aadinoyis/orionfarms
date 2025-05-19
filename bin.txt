@@ -1,0 +1,184 @@
+<div>
+            <ul className="w-min-full flex overflow-x-scroll">
+              <li className="w-full flex-grow min-w-[300px] flex flex-col gap-8 py-4">
+                <div className="flex gap-4">
+                  <div className="text-sm">01</div>
+                  <div className="flex flex-col gap-4">
+                    <h3 className="text-3xl text-bolder text-[#2d2df1]">Restaurant</h3>
+                
+                    <p>
+                      Please join us for breakfast or lunch in our farm style restaurant.
+                      The Hatchery offers fresh food and beautiful settings. Enjoy your lunch overlooking the ostriches.
+                    </p>
+
+                    <div>
+                      <Link href="/shop" className="px-4 py-2 border-1 border-[#2d2df1] rounded-full text-[#2d2df1]">Book Now</Link>
+                    </div>
+                  </div>
+                </div>
+
+                {/* <div className="w-full flex gap-8">
+                  <div className="w-full flex items-center justify-center h-[400px] overflow-hidden rounded-xl bg-[#2d2df1]">
+                    <Image
+                      src={"/images/penne-pasta-tomato-sauce-with-chicken-tomatoes-wooden-table.jpg"} 
+                      alt={"Orion Farms"}
+                      width={2750}
+                      height={1536}
+                      className="w-[80%] h-[80%] object-cover rounded-xl shrink-0 border-[1px] border-[#ddddf2]"
+                    />
+                  </div>  
+                </div> */}
+              </li>
+              <li className="w-full flex-grow min-w-[300px] flex flex-col gap-8 py-4">
+                <div className="flex gap-4">
+                  <div className="text-sm">02</div>
+                  <div className="flex flex-col gap-4">
+                    <h3 className="text-3xl text-bolder text-[#2d2df1]">Egg shop</h3>
+                
+                    <p>
+                      Our collected eggs from our healthy birds are always within your reach.
+                      We make sure to give our birds the best treatment so that they can produce
+                    </p>
+
+                    <div>
+                      <Link href="/shop" className="px-4 py-2 border-1 border-[#2d2df1] rounded-full text-[#2d2df1]">Book Now</Link>
+                    </div>
+                  </div>
+                </div>
+
+                {/* <div className="w-full flex gap-8">
+                  <div className="w-full flex items-center justify-center h-[400px] overflow-hidden rounded-xl bg-[#2d2df1]">
+                    <Image
+                      src={"/images/eggs.jpg"} 
+                      alt={"Orion Farms"}
+                      width={2750}
+                      height={1536}
+                      className="w-[80%] h-[80%] object-cover rounded-xl shrink-0 border-[1px] border-[#ddddf2]"
+                    />
+                  </div>  
+                </div> */}
+              </li>
+              <li className="w-full flex-grow min-w-[300px] flex flex-col gap-8 py-4">
+                <div className="flex gap-4">
+                  <div className="text-sm">03</div>
+                  <div className="flex flex-col gap-4">
+                    <h3 className="text-3xl text-bolder text-[#2d2df1]">Leather shop</h3>
+                
+                    <p>
+                      Explore our great selection of fine leather goods. 
+                      People who love quality leather will appreciate our wide selection of exquisite ostrich leather products. 
+                    </p>
+
+                    
+                    <div>
+                      <Link href="/shop" className="px-4 py-2 border-1 border-[#2d2df1] rounded-full text-[#2d2df1]">Book Now</Link>
+                    </div>
+                  </div>
+                </div>
+
+                {/* <div className="w-full flex gap-8">
+                  <div className="w-full flex items-center justify-center h-[400px] overflow-hidden rounded-xl bg-[#2d2df1]">
+                    <Image
+                      src={"/images/leather-texture-background.jpg"} 
+                      alt={"Orion Farms"}
+                      width={2750}
+                      height={1536}
+                      className="w-[80%] h-[80%] object-cover rounded-xl shrink-0 border-[1px] border-[#ddddf2]"
+                    />
+                  </div>  
+                </div> */}
+              </li>
+            </ul>
+          </div>
+          <div>
+            <ul className="w-min-full flex overflow-x-scroll">
+              <li className="w-full flex-grow min-w-[300px] flex flex-col gap-8 py-4">
+                <div className="flex gap-4">
+                  <div className="text-sm">01</div>
+                  <div className="flex flex-col gap-4">
+                    <h3 className="text-3xl text-bolder text-[#2d2df1]">Restaurant</h3>
+                
+                    <p>
+                      Please join us for breakfast or lunch in our farm style restaurant.
+                      The Hatchery offers fresh food and beautiful settings. Enjoy your lunch overlooking the ostriches.
+                    </p>
+
+                    <div>
+                      <Link href="/shop" className="px-4 py-2 border-1 border-[#2d2df1] rounded-full text-[#2d2df1]">Book Now</Link>
+                    </div>
+                  </div>
+                </div>
+
+                {/* <div className="w-full flex gap-8">
+                  <div className="w-full flex items-center justify-center h-[400px] overflow-hidden rounded-xl bg-[#2d2df1]">
+                    <Image
+                      src={"/images/penne-pasta-tomato-sauce-with-chicken-tomatoes-wooden-table.jpg"} 
+                      alt={"Orion Farms"}
+                      width={2750}
+                      height={1536}
+                      className="w-[80%] h-[80%] object-cover rounded-xl shrink-0 border-[1px] border-[#ddddf2]"
+                    />
+                  </div>  
+                </div> */}
+              </li>
+              <li className="w-full flex-grow min-w-[300px] flex flex-col gap-8 py-4">
+                <div className="flex gap-4">
+                  <div className="text-sm">02</div>
+                  <div className="flex flex-col gap-4">
+                    <h3 className="text-3xl text-bolder text-[#2d2df1]">Egg shop</h3>
+                
+                    <p>
+                      Our collected eggs from our healthy birds are always within your reach.
+                      We make sure to give our birds the best treatment so that they can produce
+                    </p>
+
+                    <div>
+                      <Link href="/shop" className="px-4 py-2 border-1 border-[#2d2df1] rounded-full text-[#2d2df1]">Book Now</Link>
+                    </div>
+                  </div>
+                </div>
+
+                {/* <div className="w-full flex gap-8">
+                  <div className="w-full flex items-center justify-center h-[400px] overflow-hidden rounded-xl bg-[#2d2df1]">
+                    <Image
+                      src={"/images/eggs.jpg"} 
+                      alt={"Orion Farms"}
+                      width={2750}
+                      height={1536}
+                      className="w-[80%] h-[80%] object-cover rounded-xl shrink-0 border-[1px] border-[#ddddf2]"
+                    />
+                  </div>  
+                </div> */}
+              </li>
+              <li className="w-full flex-grow min-w-[300px] flex flex-col gap-8 py-4">
+                <div className="flex gap-4">
+                  <div className="text-sm">03</div>
+                  <div className="flex flex-col gap-4">
+                    <h3 className="text-3xl text-bolder text-[#2d2df1]">Leather shop</h3>
+                
+                    <p>
+                      Explore our great selection of fine leather goods. 
+                      People who love quality leather will appreciate our wide selection of exquisite ostrich leather products. 
+                    </p>
+
+                    
+                    <div>
+                      <Link href="/shop" className="px-4 py-2 border-1 border-[#2d2df1] rounded-full text-[#2d2df1]">Book Now</Link>
+                    </div>
+                  </div>
+                </div>
+
+                {/* <div className="w-full flex gap-8">
+                  <div className="w-full flex items-center justify-center h-[400px] overflow-hidden rounded-xl bg-[#2d2df1]">
+                    <Image
+                      src={"/images/leather-texture-background.jpg"} 
+                      alt={"Orion Farms"}
+                      width={2750}
+                      height={1536}
+                      className="w-[80%] h-[80%] object-cover rounded-xl shrink-0 border-[1px] border-[#ddddf2]"
+                    />
+                  </div>  
+                </div> */}
+              </li>
+            </ul>
+          </div>
