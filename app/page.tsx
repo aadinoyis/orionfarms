@@ -143,13 +143,13 @@ export default function Home() {
               items?.map(item => (
                 <div key={item.id} className="w-full flex flex-col gap-2 shrink-0 p-2 rounded-xl border-1 border-[#2d2df1] border-dashed">
                     <Link href={`/shop/${item.id}`}  className="w-full flex gap-8">
-                      <div className="w-full flex items-end justify-end h-[150px] sm:h-[200px] overflow-hidden rounded-xl bg-[#2d2df1]">
+                      <div className="w-full max-w-full flex items-end justify-end h-[150px] sm:h-[200px] overflow-hidden rounded-xl bg-[#2d2df1]">
                         <Image
                           src={item.imageUrl[0]} 
                           alt={"Orion Farms"}
                           width={2750}
                           height={1536}
-                          className="w-[100%] h-[100%] object-cover rounded-xl shrink-0"
+                          className="w-[100%] max-w-full h-[100%] object-cover rounded-xl shrink-0"
                         />
                       </div>  
                     </Link>
