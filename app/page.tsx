@@ -141,9 +141,9 @@ export default function Home() {
           <div className="grid-view">
             {
               items?.map(item => (
-                <div key={item.id} className="w-full flex flex-col gap-2 shrink-0 p-2 rounded-xl border-1 border-[#2d2df1] border-dashed">
-                    <Link href={`/shop/${item.id}`}  className="w-full flex gap-8">
-                      <div className="w-full max-w-full flex items-end justify-end h-[150px] sm:h-[200px] overflow-hidden rounded-xl bg-[#2d2df1]">
+                <div key={item.id} className="flex flex-col gap-2 shrink-0 p-2 rounded-xl border-1 border-[#2d2df1] border-dashed">
+                    <Link href={`/shop/${item.id}`}  className="w-full max-w-full flex gap-8">
+                      <div className="w-full flex items-end justify-end h-[150px] sm:h-[200px] overflow-hidden rounded-xl bg-[#2d2df1]">
                         <Image
                           src={item.imageUrl[0]} 
                           alt={"Orion Farms"}
